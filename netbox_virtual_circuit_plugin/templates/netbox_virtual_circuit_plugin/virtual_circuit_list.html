@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Virtual Circuits</h1>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Context</th>
+        </tr>
+        {% for virtual_circuit in virtual_circuits %}
+        <tr>
+            <td>{{ virtual_circuit.vcid }}</td>
+            <td>{{ virtual_circuit.name }}</td>
+            <td>{{ virtual_circuit.status }}</td>
+            <td>{{ virtual_circuit.context }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No virtual circuits defined!</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
