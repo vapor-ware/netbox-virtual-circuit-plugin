@@ -6,7 +6,7 @@ from .models import VirtualCircuit
 
 class ListVirtualCircuitsView(View):
     """
-    List all virtual circuits in the database.
+    List all virtual circuits.
     """
     def get(self, request):
         vcs = VirtualCircuit.objects.all()

@@ -3,7 +3,7 @@ from django.db import models
 
 class VirtualCircuit(models.Model):
     """
-    Define a Virtual Circuit database model.
+    Virtual Circuit model.
     """
     vcid = models.AutoField(
         primary_key=True,
