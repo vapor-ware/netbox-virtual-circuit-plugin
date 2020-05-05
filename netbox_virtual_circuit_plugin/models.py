@@ -24,7 +24,8 @@ class VirtualCircuit(models.Model):
     status = models.CharField(
         max_length=2,
         choices=CONNECTION_STATUS,
-        blank=True
+        blank=True,
+        default='PC'
     )
 
     context = models.CharField(
