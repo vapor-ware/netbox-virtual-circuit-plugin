@@ -16,14 +16,10 @@ class VirtualCircuit(models.Model):
     )
 
     CONNECTION_STATUS = [
-        ('NP', 'Interface H/W Not Present'),
-        ('EI', 'Encapsulation Invalid'),
-        ('EM', 'Encapsulation Mismatch'),
-        ('VM', 'VLAN ID Mismatch'),
-        ('BK', 'Backup Connection'),
-        ('ST', 'Standby Connection'),
-        ('LD', 'Local Site Signaled Down'),
-        ('HS', 'Hot-standby Connection')
+        ('PC', 'Pending Configuration'),
+        ('CF', 'Configured'),
+        ('PD', 'Pending Deletion'),
+        ('CE', 'Configuration Error')
     ]
     status = models.CharField(
         max_length=2,
