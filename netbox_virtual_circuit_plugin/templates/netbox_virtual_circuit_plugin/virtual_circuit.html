@@ -2,12 +2,30 @@
 
 {% block content %}
 {% with config=settings.PLUGINS_CONFIG.netbox_virtual_circuit_plugin %}
-<h2 class="text-center" style="margin-top: 200px">
-    {% if virtual_circuit %}
-        {{ virtual_circuit.vcid }} / {{ virtual_circuit.name }}
-    {% else %}
-        No virtual circuit have been created yet!
-    {% endif %}
-</h2>
+    <h1>{{ virtual_circuit.name }}'s VLANs</h1>
+    <table class="table">
+        <tr>
+            <th>Site</th>
+            <th>Group</th>
+            <th>ID</th>
+            <th>VID</th>
+            <th>Name</th>
+            <th>Status</th>
+        </tr>
+        {% for vlan in vlans %}
+        <tr>
+            <td>{{ vlan.site }}</td>
+            <td>{{ vlan.group }}</td>
+            <td>{{ vlan.id }}</td>
+            <td>{{ vlan.vid }}</td>
+            <td>{{ vlan.name }}</td>
+            <td>{{ vlan.status }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No vlans found!</td>
+        </tr>
+    {% endfor %}
+    </table>
 {% endwith %}
 {% endblock %}
