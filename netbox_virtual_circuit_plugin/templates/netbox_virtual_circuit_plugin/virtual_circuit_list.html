@@ -13,7 +13,7 @@
         <tr>
             <td><a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit' vcid=virtual_circuit.vcid %}">{{ virtual_circuit.vcid}}</a></td>
             <td>{{ virtual_circuit.name }}</td>
-            <td>{{ virtual_circuit.status }} - {{ virtual_circuit.get_status_display }}</td>
+            <td>{{ virtual_circuit.get_status_display }}</td>
             <td>{{ virtual_circuit.context }}</td>
         </tr>
         {% empty %}
