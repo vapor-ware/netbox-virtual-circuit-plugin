@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% with config=settings.PLUGINS_CONFIG.netbox_virtual_circuit_plugin %}
+<h2 class="text-center" style="margin-top: 200px">
+    {% if virtual_circuit %}
+        {{ virtual_circuit.vcid }} / {{ virtual_circuit.name }}
+    {% else %}
+        No virtual circuit have been created yet!
+    {% endif %}
+</h2>
+{% endwith %}
+{% endblock %}
