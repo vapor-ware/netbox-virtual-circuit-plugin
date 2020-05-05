@@ -12,11 +12,12 @@
         </tr>
         {% for vlan in vlans %}
         <tr>
-            <!-- <td>{{ vlan.vid }}</td> -->
             <td><a href="{% url 'ipam:vlan_list' %}{{ vlan.pk }}">{{ vlan.vid }}</a></td>
             <td>{{ vlan.name }}</td>
             <td>{{ vlan.status }}</td>
-            <td>{{ vlan.get_members }}</td>
+
+            <!-- FIXME: will there be a case where multiple interface is attached to a VLAN?  -->
+            <td>{{ vlan.get_members.0 }}</td>
         </tr>
         {% empty %}
         <tr>
