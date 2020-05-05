@@ -1,4 +1,5 @@
 from django.db import models
+from ipam.models import VLAN
 
 
 class VirtualCircuit(models.Model):
@@ -26,7 +27,8 @@ class VirtualCircuit(models.Model):
     ]
     status = models.CharField(
         max_length=2,
-        choices=CONNECTION_STATUS
+        choices=CONNECTION_STATUS,
+        blank=True
     )
 
     context = models.CharField(
@@ -39,3 +41,22 @@ class VirtualCircuit(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class VCVLAN(models.Model):
+    """
+    Virtual Circuit to VLAN relationship.
+    """
+    vc = models.ForeignKey(
+        to=VirtualCircuit,
+        on_delete=models.CASCADE
+    )
+
+    vlan = models.OneToOneField(
+        to=VLAN,
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        ordering = ['vc']
+
