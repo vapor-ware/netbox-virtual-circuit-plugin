@@ -8,16 +8,14 @@
             <th> ID </th>
             <th> Name </th>
             <th> Status </th>
-            <th> Members </th>
+            <th> Interface </th>
         </tr>
         {% for vlan in vlans %}
         <tr>
             <td><a href="{% url 'ipam:vlan_list' %}{{ vlan.pk }}">{{ vlan.vid }}</a></td>
             <td>{{ vlan.name }}</td>
             <td>{{ vlan.status }}</td>
-
-            <!-- FIXME: will there be a case where multiple interface is attached to a VLAN?  -->
-            <td>{{ vlan.get_members.0 }}</td>
+            <td>{{ vlan.get_members.0 }}</td> <!-- NOTE: get only the first member due to Vapor's specific use case -->
         </tr>
         {% empty %}
         <tr>
