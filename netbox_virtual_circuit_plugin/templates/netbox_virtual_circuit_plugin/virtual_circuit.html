@@ -2,24 +2,21 @@
 
 {% block content %}
 {% with config=settings.PLUGINS_CONFIG.netbox_virtual_circuit_plugin %}
-    <h1>{{ virtual_circuit.name }}'s VLANs</h1>
+    <h1>Virtual Circuit {{ virtual_circuit.vcid }} ({{ virtual_circuit.name }})</h1>
     <table class="table">
         <tr>
-            <th>Site</th>
-            <th>Group</th>
-            <th>ID</th>
-            <th>VID</th>
-            <th>Name</th>
-            <th>Status</th>
+            <th> ID </th>
+            <th> Name </th>
+            <th> Status </th>
+            <th> Members </th>
         </tr>
         {% for vlan in vlans %}
         <tr>
-            <td>{{ vlan.site }}</td>
-            <td>{{ vlan.group }}</td>
-            <td>{{ vlan.id }}</td>
-            <td>{{ vlan.vid }}</td>
+            <!-- <td>{{ vlan.vid }}</td> -->
+            <td><a href="{% url 'ipam:vlan_list' %}{{ vlan.pk }}">{{ vlan.vid }}</a></td>
             <td>{{ vlan.name }}</td>
             <td>{{ vlan.status }}</td>
+            <td>{{ vlan.get_members }}</td>
         </tr>
         {% empty %}
         <tr>
