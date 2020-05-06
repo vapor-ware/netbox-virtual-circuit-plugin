@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from netbox_virtual_circuit_plugin.models import VirtualCircuit, VCVLAN
+from netbox_virtual_circuit_plugin.models import VirtualCircuit, VirtualCircuitVLAN
 
 
 class VirtualCircuitSerializer(ModelSerializer):
@@ -8,8 +8,8 @@ class VirtualCircuitSerializer(ModelSerializer):
         model = VirtualCircuit
         fields = '__all__'
 
-class VCVLANSerializer(ModelSerializer):
+class VirtualCircuitVLANSerializer(ModelSerializer):
 
     class Meta:
-        model = VCVLAN
+        model = VirtualCircuitVLAN
         fields = '__all__'

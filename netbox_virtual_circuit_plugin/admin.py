@@ -1,18 +1,18 @@
 from django.contrib import admin
-from .models import VirtualCircuit, VCVLAN
+from .models import VirtualCircuit, VirtualCircuitVLAN
 
 
 @admin.register(VirtualCircuit)
 class VirtualCircuitAdmin(admin.ModelAdmin):
     """
-    Administrative view for Virtual Circuit.
+    Administrative view for VirtualCircuit.
     """
     list_display = ('vcid', 'name', 'status', 'context')
 
 
-@admin.register(VCVLAN)
-class VCVLANAdmin(admin.ModelAdmin):
+@admin.register(VirtualCircuitVLAN)
+class VirtualCircuitVLANAdmin(admin.ModelAdmin):
     """
-    Administrative view for VCVLAN.
+    Administrative view for VirtualCircuitVLAN.
     """
     list_display = ('vc', 'vlan')

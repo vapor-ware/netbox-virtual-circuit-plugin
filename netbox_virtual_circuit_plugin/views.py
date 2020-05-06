@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.views.generic import View
-from .models import VirtualCircuit, VCVLAN, VLAN
+from .models import VirtualCircuit, VirtualCircuitVLAN, VLAN
 
 
 class ListVirtualCircuitsView(View):
@@ -19,7 +19,7 @@ class VirtualCircuitView(View):
     """
     def get(self, request, vcid):
         vc = get_object_or_404(VirtualCircuit.objects.filter(vcid=vcid))
-        vlan_ids = VCVLAN.objects.filter(vc=vc).values_list('vlan_id', flat=True)
+        vlan_ids = VirtualCircuitVLAN.objects.filter(vc=vc).values_list('vlan_id', flat=True)
 
         vlans = []
         for vid in vlan_ids:

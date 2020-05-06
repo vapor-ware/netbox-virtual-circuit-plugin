@@ -40,7 +40,7 @@ class VirtualCircuit(models.Model):
         return self.name
 
 
-class VCVLAN(models.Model):
+class VirtualCircuitVLAN(models.Model):
     """
     Virtual Circuit to VLAN relationship.
     """

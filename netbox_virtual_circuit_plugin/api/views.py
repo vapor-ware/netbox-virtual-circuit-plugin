@@ -1,12 +1,12 @@
 from rest_framework.viewsets import ModelViewSet
-from netbox_virtual_circuit_plugin.models import VirtualCircuit, VCVLAN
-from .serializers import VirtualCircuitSerializer, VCVLANSerializer
+from netbox_virtual_circuit_plugin.models import VirtualCircuit, VirtualCircuitVLAN
+from .serializers import VirtualCircuitSerializer, VirtualCircuitVLANSerializer
 
 
 class VirtualCircuitViewSet(ModelViewSet):
     queryset = VirtualCircuit.objects.all()
     serializer_class = VirtualCircuitSerializer
 
-class VCVLANViewSet(ModelViewSet):
-    queryset = VCVLAN.objects.all()
-    serializer_class = VCVLANSerializer
+class VirtualCircuitVLANViewSet(ModelViewSet):
+    queryset = VirtualCircuitVLAN.objects.all()
+    serializer_class = VirtualCircuitVLANSerializer

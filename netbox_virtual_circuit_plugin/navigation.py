@@ -16,13 +16,13 @@ menu_items = (
                 color=ButtonColorChoices.GREEN,
                 permissions=['netbox_virtual_circuit_plugin.add_virtualcircuit']
             ),
-            # Links to the admin view to assign a virtual circuit to a VLAN if user has the "add_vcvlan" permission.
+            # Links to the admin view to assign a virtual circuit to a VLAN if user has the "add_virtualcircuitvlan" permission.
             PluginMenuButton(
-                link='admin:netbox_virtual_circuit_plugin_vcvlan_add',
+                link='admin:netbox_virtual_circuit_plugin_virtualcircuitvlan_add',
                 title='Assign a virtual circuit to a VLAN',
                 icon_class='fa fa-plus',
                 color=ButtonColorChoices.BLUE,
-                permissions=['netbox_virtual_circuit_plugin.add_vcvlan']
+                permissions=['netbox_virtual_circuit_plugin.add_virtualcircuitvlan']
             ),
         )
     ),
