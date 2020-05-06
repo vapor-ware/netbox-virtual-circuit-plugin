@@ -5,4 +5,4 @@ class VirtualCircuitSerializer(ModelSerializer):
 
     class Meta:
         model = VirtualCircuit
-        fields = ('vcid', 'name', 'status', 'context')
+        fields = '__all__'
