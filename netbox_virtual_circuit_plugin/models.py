@@ -7,8 +7,7 @@ class VirtualCircuit(models.Model):
     """
     Virtual Circuit model.
     """
-    vcid = models.AutoField(
-        primary_key=True,
+    vcid = models.PositiveSmallIntegerField(
         verbose_name='ID'
     )
     name = models.CharField(
@@ -21,7 +20,7 @@ class VirtualCircuit(models.Model):
     )
     context = models.CharField(
         max_length=100,
-        blank=True,
+        blank=True
     )
 
     class Meta:
