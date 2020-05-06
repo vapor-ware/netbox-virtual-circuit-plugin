@@ -1,5 +1,6 @@
 from django.db import models
 from ipam.models import VLAN
+from .choices import VirtualCircuitStatusChoices
 
 
 class VirtualCircuit(models.Model):
@@ -10,24 +11,14 @@ class VirtualCircuit(models.Model):
         primary_key=True,
         verbose_name='ID'
     )
-
     name = models.CharField(
         max_length=64
     )
-
-    CONNECTION_STATUS = [
-        ('PC', 'Pending Configuration'),
-        ('CF', 'Configured'),
-        ('PD', 'Pending Deletion'),
-        ('CE', 'Configuration Error')
-    ]
     status = models.CharField(
-        max_length=2,
-        choices=CONNECTION_STATUS,
-        blank=True,
-        default='PC'
+        max_length=30,
+        choices=VirtualCircuitStatusChoices,
+        default=VirtualCircuitStatusChoices.STATUS_PENDING_CONFIGURATION
     )
-
     context = models.CharField(
         max_length=100,
         blank=True,
@@ -44,16 +35,14 @@ class VirtualCircuitVLAN(models.Model):
     """
     Virtual Circuit to VLAN relationship.
     """
-    vc = models.ForeignKey(
+    virtual_circuit = models.ForeignKey(
         to=VirtualCircuit,
         on_delete=models.CASCADE
     )
-
     vlan = models.OneToOneField(
         to=VLAN,
         on_delete=models.CASCADE
     )
 
     class Meta:
-        ordering = ['vc']
-
+        ordering = ['virtual_circuit']

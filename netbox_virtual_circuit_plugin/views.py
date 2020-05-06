@@ -19,7 +19,7 @@ class VirtualCircuitView(View):
     """
     def get(self, request, vcid):
         vc = get_object_or_404(VirtualCircuit.objects.filter(vcid=vcid))
-        vlan_ids = VirtualCircuitVLAN.objects.filter(vc=vc).values_list('vlan_id', flat=True)
+        vlan_ids = VirtualCircuitVLAN.objects.filter(virtual_circuit=vc).values_list('vlan_id', flat=True)
 
         vlans = []
         for vid in vlan_ids:

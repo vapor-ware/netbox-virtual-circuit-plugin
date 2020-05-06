@@ -15,4 +15,4 @@ class VirtualCircuitVLANAdmin(admin.ModelAdmin):
     """
     Administrative view for VirtualCircuitVLAN.
     """
-    list_display = ('vc', 'vlan')
+    list_display = ('virtual_circuit', 'vlan')
