@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.views.generic import View
-
 from .models import VirtualCircuit, VCVLAN, VLAN
 
 
