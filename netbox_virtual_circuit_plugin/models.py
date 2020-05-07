@@ -4,9 +4,8 @@ from .choices import VirtualCircuitStatusChoices
 
 
 class VirtualCircuit(models.Model):
-    """
-    Virtual Circuit model.
-    """
+    """Virtual Circuit model."""
+
     vcid = models.PositiveSmallIntegerField(
         verbose_name='ID'
     )
@@ -31,9 +30,8 @@ class VirtualCircuit(models.Model):
 
 
 class VirtualCircuitVLAN(models.Model):
-    """
-    Virtual Circuit to VLAN relationship.
-    """
+    """Virtual Circuit to VLAN relationship."""
+
     virtual_circuit = models.ForeignKey(
         to=VirtualCircuit,
         on_delete=models.CASCADE

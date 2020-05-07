@@ -2,6 +2,7 @@ from utilities.choices import ChoiceSet
 
 
 class VirtualCircuitStatusChoices(ChoiceSet):
+    """List of possible status for a Virtual Circuit."""
 
     STATUS_PENDING_CONFIGURATION = 'pending-configuration'
     STATUS_CONFIGURED = 'configured'
