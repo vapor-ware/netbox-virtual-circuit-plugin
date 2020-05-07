@@ -7,7 +7,8 @@ class VirtualCircuit(models.Model):
     """Virtual Circuit model."""
 
     vcid = models.PositiveSmallIntegerField(
-        verbose_name='ID'
+        verbose_name='ID',
+        primary_key=True
     )
     name = models.CharField(
         max_length=64
