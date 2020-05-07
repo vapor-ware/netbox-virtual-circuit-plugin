@@ -4,8 +4,15 @@ from .serializers import VirtualCircuitSerializer, VirtualCircuitVLANSerializer
 
 
 class VirtualCircuitViewSet(ModelViewSet):
-    queryset = VirtualCircuit.objects.all()
     serializer_class = VirtualCircuitSerializer
+
+    def get_queryset(self):
+        context = self.request.query_params.get('context', None)
+        if context is None:
+            queryset = VirtualCircuit.objects.all().order_by('vcid')
+        else:
+            queryset = VirtualCircuit.objects.filter(context=context)
+        return queryset
 
 class VirtualCircuitVLANViewSet(ModelViewSet):
     queryset = VirtualCircuitVLAN.objects.all()
