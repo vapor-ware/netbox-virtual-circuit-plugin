@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Virtual Circuits</h1>
+    <table class="table table-hover panel-body attr-table">
+        <tr style="background-color:#f8f8f8;">
+            <th>ID</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Context</th>
+        </tr>
+        {% for virtual_circuit in virtual_circuits %}
+        <tr>
+            <td><a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit' vcid=virtual_circuit.vcid %}">{{ virtual_circuit.vcid}}</a></td>
+            <td>{{ virtual_circuit.name }}</td>
+            <td>{{ virtual_circuit.get_status_display }}</td>
+            <td>{{ virtual_circuit.context }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>No Virtual Circuits defined!</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
