@@ -12,9 +12,8 @@ a context. Each must be assigned one of the following operational statuses:
 - Pending Deletion
 - Configuration Error
 
-Each VLAN is unique to a Virtual Circuit in a sense that when it is assigned to a
-Virtual Circuit, it can not exist in another Virtual Circuit without first being 
-removed.
+When a VLAN is assigned to a Virtual Circuit, it can not exist in another Virtual
+Circuit without first being removed.
 
 ## Installation
 
