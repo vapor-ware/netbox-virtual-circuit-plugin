@@ -1,12 +1,15 @@
 # NetBox Virtual Circuit Plugin
 
 A plugin for [NetBox](https://github.com/netbox-community/netbox) that supports
-Virtual Circuit Management.
+Virtual Circuit management.
+
+## Definitions
 
 A Virtual Circuit is a circuit created by routing two or more VLANs together.
 
 Each Virtual Circuit is identified by a name, a numeric ID (0-32767), along with
-a context. Each must be assigned one of the following operational statuses:
+a context. Each Virtual Circuit must be assigned one of the following operational
+statuses:
 - Pending Configuration
 - Configured
 - Pending Deletion
@@ -15,7 +18,7 @@ a context. Each must be assigned one of the following operational statuses:
 When a VLAN is assigned to a Virtual Circuit, it can not exist in another Virtual
 Circuit without first being removed.
 
-## Installation
+## Installing
 
 ```
 pip install netbox-virtual-circuit-plugin
