@@ -7,6 +7,7 @@ class VirtualCircuit(models.Model):
     """Virtual Circuit model."""
 
     vcid = models.PositiveSmallIntegerField(
+        primary_key=True,
         verbose_name='ID'
     )
     name = models.CharField(
@@ -34,11 +35,13 @@ class VirtualCircuitVLAN(models.Model):
 
     virtual_circuit = models.ForeignKey(
         to=VirtualCircuit,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='vlans'
     )
     vlan = models.OneToOneField(
         to=VLAN,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='vlan_of'
     )
 
     class Meta:
