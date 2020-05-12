@@ -18,12 +18,6 @@ statuses:
 When a VLAN is assigned to a Virtual Circuit, it can not exist in another Virtual
 Circuit without first being removed.
 
-## Installing
-
-```
-pip install netbox-virtual-circuit-plugin
-```
-
 ## Using
 
 Once the plugin is installed correctly as guided
