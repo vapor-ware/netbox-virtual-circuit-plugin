@@ -35,7 +35,7 @@ PLUGINS = ['netbox_virtual_circuit_plugin'] # Note that the name here use unders
 
 Don't forget to restart NetBox to load the new plugin.
 
-For more information about installing the plugins, refer to [NetBox's
+For more information about installing plugins, refer to [NetBox's
 documentation
 ](https://netbox.readthedocs.io/en/stable/plugins/).
 
