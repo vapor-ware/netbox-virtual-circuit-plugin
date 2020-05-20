@@ -20,16 +20,30 @@ Circuit without first being removed.
 
 ## Installing
 
-```
+Since the plugin is published on
+[PyPI](https://pypi.org/project/netbox-virtual-circuit-plugin/), simply issue:
+```python
 pip install netbox-virtual-circuit-plugin
 ```
+to download and install it.
+
+To enable to plugin, add the plugin's name to the `PLUGINS` list in
+`configuration.py` like so:
+```python
+PLUGINS = ['netbox_virtual_circuit_plugin'] # Note that the name here use underscore, not hyphen.
+```
+
+Don't forget to restart NetBox to load the new plugin.
+
+For more information about installing the plugins, refer to [NetBox's
+documentation
+](https://netbox.readthedocs.io/en/stable/plugins/).
 
 ## Using
 
-Once the plugin is installed correctly as guided
-[here](https://netbox.readthedocs.io/en/stable/plugins/), one can find the
+Once the plugin is installed correctly as instructed above, one can find the
 **Virtual Circuit** section under **Plugins** navigation tab via NetBox UI
-that is ready to use with correct admin permission.
+that is ready to use with correct *admin* permission.
 
 As for REST API use cases, the 2 group endpoints are exposed at:
 - `/api/plugins/virtual-circuit/virtual-circuits`
