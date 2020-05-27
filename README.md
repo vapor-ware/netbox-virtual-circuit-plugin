@@ -66,6 +66,16 @@ Plugins are essentially self-contained Django apps which integrate with NetBox
 to provide custom functionality. For more information, see [NetBox
 documentation](https://netbox.readthedocs.io/en/stable/plugins/development/).
 
+To help setup the development environment, it comes with a CLI helper
+based on `Makefile`, including the following commands:
+```
+clean            Clean up build artifacts and stale docker volume
+deploy           Run a local development deployment of the plugin with netbox
+docker           Build a local docker image
+help             Print usage information
+version          Print the version
+```
+
 ## Contributing
 
 If you experience a bug, would like to ask a question, or request a feature,

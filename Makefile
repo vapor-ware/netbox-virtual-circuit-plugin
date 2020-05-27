@@ -6,7 +6,7 @@ COMPOSE_FILE := dev/docker-compose.yml
 .PHONY: clean deploy docker version help
 .DEFAULT_GOAL := help
 
-clean:  ## Clean up build artifacts
+clean:  ## Clean up build artifacts and stale docker volume
 	rm -rf build/ dist/ *.egg-info
 	docker volume rm netbox_virtual_circuit_plugin_pgdata_netbox_virtual_circuit_plugin
 
