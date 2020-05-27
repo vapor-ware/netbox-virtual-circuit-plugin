@@ -16,8 +16,6 @@ services:
     user: '101'
     volumes:
       - ./configuration.py:/opt/netbox/netbox/netbox/configuration.py
-      - netbox-static-files:/opt/netbox/netbox/static:z
-      - netbox-media-files:/opt/netbox/netbox/media:z
     tty: true
 
   worker:
@@ -33,8 +31,6 @@ services:
     user: '101'
     volumes:
       - ./configuration.py:/opt/netbox/netbox/netbox/configuration.py
-      - netbox-static-files:/opt/netbox/netbox/static:z
-      - netbox-media-files:/opt/netbox/netbox/media:z
     tty: true
 
   postgres:
@@ -52,9 +48,5 @@ services:
     env_file: ./dev.env
 
 volumes:
-  netbox-static-files:
-    driver: local
-  netbox-media-files:
-    driver: local
   pgdata_netbox_virtual_circuit_plugin:
     driver: local

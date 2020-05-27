@@ -8,11 +8,12 @@ COMPOSE_FILE := dev/docker-compose.yml
 
 clean:  ## Clean up build artifacts
 	rm -rf build/ dist/ *.egg-info
+	docker volume rm netbox_virtual_circuit_plugin_pgdata_netbox_virtual_circuit_plugin
 
 deploy:  ## Run a local development deployment of the plugin with netbox
 	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} up
 
-docker:  ## Build the docker image
+docker:  ## Build a local docker image
 	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} build
 
 version:  ## Print the version

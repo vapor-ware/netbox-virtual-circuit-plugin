@@ -14,7 +14,10 @@ COPY dev/entrypoint.sh /opt/netbox/entrypoint.sh
 # Work around https://github.com/rq/django-rq/issues/421
 RUN pip install django-rq==2.3.2
 
-# Install plugin.
-RUN pip install netbox-virtual-circuit-plugin
+# Install the plugin in develop mode.
+RUN mkdir -p /netbox-virtual-circuit-plugin
+WORKDIR /netbox-virtual-circuit-plugin
+COPY . /netbox-virtual-circuit-plugin
+RUN python3 setup.py develop
 
 WORKDIR /opt/netbox/netbox/
