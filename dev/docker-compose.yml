@@ -5,9 +5,7 @@ services:
       context: ../
       dockerfile: dev/Dockerfile
     image: "netbox-virtual-circuit-plugin/netbox:master-py3.7"
-    command: >
-      sh -c "python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:8000"
+    command: sh -c "/opt/netbox/entrypoint.sh"
     ports:
       - "8000:8000"
     depends_on:

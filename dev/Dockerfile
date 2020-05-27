@@ -8,7 +8,7 @@ RUN git clone --single-branch --branch master https://github.com/netbox-communit
     cd /opt/netbox/ && \
     pip install -r /opt/netbox/requirements.txt
 
-# Copy entrypoint over.
+# Copy entrypoint script.
 COPY dev/entrypoint.sh /opt/netbox/entrypoint.sh
 
 # Work around https://github.com/rq/django-rq/issues/421
@@ -18,4 +18,3 @@ RUN pip install django-rq==2.3.2
 RUN pip install netbox-virtual-circuit-plugin
 
 WORKDIR /opt/netbox/netbox/
-CMD [./opt/netbox/entrypoint.sh]

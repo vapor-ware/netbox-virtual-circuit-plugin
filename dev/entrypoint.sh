@@ -56,3 +56,7 @@ END
 
   echo "💡 Superuser Username: ${SUPERUSER_NAME}, E-Mail: ${SUPERUSER_EMAIL}"
 fi
+
+# Run migrations and development server.
+./manage.py migrate
+./manage.py runserver 0.0.0.0:8000
