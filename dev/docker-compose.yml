@@ -1,0 +1,62 @@
+version: '3'
+services:
+  netbox:
+    build:
+      context: ../
+      dockerfile: dev/Dockerfile
+    image: "netbox-virtual-circuit-plugin/netbox:master-py3.7"
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./dev.env
+    user: '101'
+    volumes:
+      - ./configuration.py:/opt/netbox/netbox/netbox/configuration.py
+      - netbox-static-files:/opt/netbox/netbox/static:z
+      - netbox-media-files:/opt/netbox/netbox/media:z
+    tty: true
+
+  worker:
+    build:
+      context: ../
+      dockerfile: dev/Dockerfile
+    image: "netbox-virtual-circuit-plugin/netbox:master-py3.7"
+    command: sh -c "python manage.py rqworker"
+    depends_on:
+      - netbox
+    env_file:
+      - ./dev.env
+    user: '101'
+    volumes:
+      - ./configuration.py:/opt/netbox/netbox/netbox/configuration.py
+      - netbox-static-files:/opt/netbox/netbox/static:z
+      - netbox-media-files:/opt/netbox/netbox/media:z
+    tty: true
+
+  postgres:
+    image: postgres:10
+    env_file: dev.env
+    volumes:
+      - pgdata_netbox_virtual_circuit_plugin:/var/lib/postgresql/data
+
+  redis:
+    image: redis:5-alpine
+    command:
+      - sh
+      - -c  # this is to evaluate the $REDIS_PASSWORD from the env
+      - redis-server --appendonly yes --requirepass $$REDIS_PASSWORD  ## $$ because of docker-compose
+    env_file: ./dev.env
+
+volumes:
+  netbox-static-files:
+    driver: local
+  netbox-media-files:
+    driver: local
+  pgdata_netbox_virtual_circuit_plugin:
+    driver: local
