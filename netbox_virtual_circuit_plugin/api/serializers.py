@@ -3,25 +3,25 @@ from netbox_virtual_circuit_plugin.models import VirtualCircuit, VirtualCircuitV
 
 
 class VLANSerializer(ModelSerializer):
-    id = SerializerMethodField('get_id')
-    vid = SerializerMethodField('get_vid')
 
     class Meta:
         model = VirtualCircuitVLAN
-        fields = ['id', 'vid']
-
-    def get_id(self, obj):
-        return obj.vlan.id
-
-    def get_vid(self, obj):
-        return obj.vlan.vid
+        fields = ['vlan']
 
 class VirtualCircuitSerializer(ModelSerializer):
-    vlans = VLANSerializer(many=True, read_only=True)
+    vlans = VLANSerializer(many=True)
 
     class Meta:
         model = VirtualCircuit
         fields = ['vcid', 'name', 'status', 'context', 'vlans']
+
+    def create(self, validated_data):
+        vlans_data = validated_data.pop('vlans')
+        virtual_circuit = VirtualCircuit.objects.create(**validated_data)
+        for vlan in vlans_data:
+            VirtualCircuitVLAN.objects.create(virtual_circuit=virtual_circuit, **vlan)
+        return virtual_circuit
+
 
 class VirtualCircuitVLANSerializer(ModelSerializer):
 

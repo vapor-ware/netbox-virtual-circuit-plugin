@@ -41,9 +41,7 @@ You might also have to manually run the database migrations for Netbox to create
 python3 manage.py migrate
 ```
 
-For more information about installing plugins, refer to [NetBox's
-documentation
-](https://netbox.readthedocs.io/en/stable/plugins/).
+For more information about installing plugins, refer to [NetBox's documentation.](https://netbox.readthedocs.io/en/stable/plugins/)
 
 ## Using
 
