@@ -15,6 +15,10 @@ deploy:  ## Run a local development deployment of the plugin with NetBox
 docker:  ## Build a local docker image
 	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} build
 
+release: clean  ## Package and distribute the current release to PyPI
+	python3 setup.py sdist bdist_wheel
+	python3 -m twine upload dist/*
+
 version:  ## Print the version
 	@echo "${PKG_VERSION}"
 
