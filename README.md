@@ -73,6 +73,7 @@ clean            Clean up build artifacts
 deploy           Run a local development deployment of the plugin with NetBox
 docker           Build a local docker image
 help             Print usage information
+release          Package and distribute the current release to PyPI
 version          Print the version
 ```
 
