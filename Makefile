@@ -6,11 +6,10 @@ COMPOSE_FILE := dev/docker-compose.yml
 .PHONY: clean deploy docker version help
 .DEFAULT_GOAL := help
 
-clean:  ## Clean up build artifacts and stale docker volume
+clean:  ## Clean up build artifacts
 	rm -rf build/ dist/ *.egg-info
-	docker volume rm netbox_virtual_circuit_plugin_pgdata_netbox_virtual_circuit_plugin
 
-deploy:  ## Run a local development deployment of the plugin with netbox
+deploy:  ## Run a local development deployment of the plugin with NetBox
 	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} up
 
 docker:  ## Build a local docker image

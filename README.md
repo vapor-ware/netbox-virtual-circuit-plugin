@@ -69,12 +69,24 @@ documentation](https://netbox.readthedocs.io/en/stable/plugins/development/).
 To help setup the development environment, it comes with a CLI helper
 based on `Makefile`, including the following commands:
 ```
-clean            Clean up build artifacts and stale docker volume
-deploy           Run a local development deployment of the plugin with netbox
+clean            Clean up build artifacts
+deploy           Run a local development deployment of the plugin with NetBox
 docker           Build a local docker image
 help             Print usage information
 version          Print the version
 ```
+
+That said, one can simply build and run a local development image of the plugin
+with NetBox with a single line:
+```
+make build && make deploy
+```
+
+The application will be available after a few minutes at
+`http://0.0.0.0:8000/`. The default credentials are:
+- Username: **admin**
+- Password: **admin**
+- API Token: **0123456789abcdef0123456789abcdef01234567**
 
 ## Contributing
 
