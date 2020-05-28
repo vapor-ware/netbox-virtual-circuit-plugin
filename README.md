@@ -72,6 +72,7 @@ deploy           Run a local development deployment of the plugin with NetBox
 docker           Build a local docker image
 help             Print usage information
 release          Package and distribute the current release to PyPI
+test             Run unit tests
 version          Print the version
 ```
 
