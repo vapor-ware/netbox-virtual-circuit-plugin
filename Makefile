@@ -3,7 +3,7 @@ PKG_VERSION  :=  $(shell python setup.py --version)
 IMAGE_NAME   := netbox_virtual_circuit_plugin
 COMPOSE_FILE := dev/docker-compose.yml
 
-.PHONY: clean deploy docker version help
+.PHONY: clean deploy docker release version help
 .DEFAULT_GOAL := help
 
 clean:  ## Clean up build artifacts
