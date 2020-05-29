@@ -1,5 +1,6 @@
-from django.test import TestCase
 from django.core.exceptions import ValidationError
+from django.test import TestCase
+
 from netbox_virtual_circuit_plugin.models import VirtualCircuit, VLAN, VirtualCircuitVLAN
 from netbox_virtual_circuit_plugin.choices import VirtualCircuitStatusChoices
 
