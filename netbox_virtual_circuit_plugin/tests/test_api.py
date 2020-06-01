@@ -11,7 +11,7 @@ from netbox_virtual_circuit_plugin.models import VirtualCircuit, VLAN, VirtualCi
 from netbox_virtual_circuit_plugin.choices import VirtualCircuitStatusChoices
 
 
-class VirtualCircuitsEndpointTestCase(TestCase):
+class VirtualCircuitEndpointTestCase(TestCase):
     def setUp(self):
         # Create a superuser and token for API calls.
         self.user = User.objects.create(username='testuser', is_superuser=True)
@@ -110,3 +110,76 @@ class VirtualCircuitsEndpointTestCase(TestCase):
         data = {'vcid': 7, 'name': 'foo', 'context': 'bar', 'vlans': [{'vlan': 400}]}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_patch_200_name(self):
+        data = {'name': 'patched-foo'}
+        response = self.client.patch(f'{self.url}{self.vc1.vcid}/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['vcid'], 1)
+        self.assertEqual(response.data['name'], 'patched-foo')
+        self.assertEqual(response.data['status'], VirtualCircuitStatusChoices.STATUS_PENDING_CONFIGURATION)
+        self.assertEqual(response.data['context'], '')
+        self.assertEqual(len(response.data['vlans']), 2)
+        self.assertEqual(response.data['vlans'][0]['vlan'], self.vlan1.id)
+        self.assertEqual(response.data['vlans'][1]['vlan'], self.vlan2.id)
+
+    def test_patch_200_status(self):
+        data = {'status': VirtualCircuitStatusChoices.STATUS_CONFIGURED}
+        response = self.client.patch(f'{self.url}{self.vc1.vcid}/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['vcid'], 1)
+        self.assertEqual(response.data['name'], 'VC 1')
+        self.assertEqual(response.data['status'], VirtualCircuitStatusChoices.STATUS_CONFIGURED)
+        self.assertEqual(response.data['context'], '')
+        self.assertEqual(len(response.data['vlans']), 2)
+        self.assertEqual(response.data['vlans'][0]['vlan'], self.vlan1.id)
+        self.assertEqual(response.data['vlans'][1]['vlan'], self.vlan2.id)
+
+    def test_patch_400_invalid_status(self):
+        data = {'status': 'invalid'}
+        response = self.client.patch(f'{self.url}{self.vc1.vcid}/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_delete_204(self):
+        response = self.client.delete(f'{self.url}{self.vc1.vcid}/')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_delete_404(self):
+        response = self.client.delete(f'{self.url}{100}/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+class VCVLANEndpointTestCase(TestCase):
+    def setUp(self):
+        # Create a superuser and token for API calls.
+        self.user = User.objects.create(username='testuser', is_superuser=True)
+        self.token = Token.objects.create(user=self.user)
+        self.client = APIClient()
+        self.client.credentials(HTTP_AUTHORIZATION=f'Token {self.token.key}')
+
+        # Base URL.
+        self.url = '/api/plugins/virtual-circuit/vlans/'
+
+        # Seed data.
+        self.vc1 = VirtualCircuit.objects.create(vcid=1, name='VC 1')
+        self.vc2 = VirtualCircuit.objects.create(vcid=2, name='VC 2')
+
+        self.vlan1 = VLAN.objects.create(vid=1, name='VLAN 1')
+        self.vlan2 = VLAN.objects.create(vid=2, name='VLAN 2')
+        self.vlan3 = VLAN.objects.create(vid=3, name='VLAN 3')
+
+        self.vc1_vlan1 = VirtualCircuitVLAN.objects.create(virtual_circuit=self.vc1, vlan=self.vlan1)
+
+    def test_list(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['count'], 1)
+
+    def test_get_200(self):
+        response = self.client.get(f'{self.url}{1}/')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['virtual_circuit'], self.vc1.vcid)
+        self.assertEqual(response.data['vlan'], self.vlan1.id)
+
+    def test_get_404(self):
+        response = self.client.get(f'{self.url}{100}/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
