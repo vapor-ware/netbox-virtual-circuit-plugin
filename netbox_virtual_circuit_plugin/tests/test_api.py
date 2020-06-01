@@ -58,10 +58,10 @@ class VirtualCircuitEndpointTestCase(TestCase):
     def test_create_400_missing_params(self):
         response = self.client.post(self.url, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(len(response.data), 3)
         self.assertIn('vcid', response.data)
         self.assertIn('name', response.data)
         self.assertIn('vlans', response.data)
-        self.assertEqual(len(response.data), 3)
 
     def test_create_400_existed_vc(self):
         data = {'vcid': 1, 'name': 'foo', 'context': 'bar', 'vlans': []}
@@ -168,18 +168,58 @@ class VCVLANEndpointTestCase(TestCase):
         self.vlan3 = VLAN.objects.create(vid=3, name='VLAN 3')
 
         self.vc1_vlan1 = VirtualCircuitVLAN.objects.create(virtual_circuit=self.vc1, vlan=self.vlan1)
+        self.vc2_vlan2 = VirtualCircuitVLAN.objects.create(virtual_circuit=self.vc2, vlan=self.vlan2)
 
     def test_list(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['count'], 1)
+        self.assertEqual(response.data['count'], 2)
 
     def test_get_200(self):
-        response = self.client.get(f'{self.url}{1}/')
+        response = self.client.get(f'{self.url}{self.vc1_vlan1.id}/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['virtual_circuit'], self.vc1.vcid)
         self.assertEqual(response.data['vlan'], self.vlan1.id)
 
     def test_get_404(self):
         response = self.client.get(f'{self.url}{100}/')
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_create_201(self):
+        data = {'virtual_circuit': self.vc2.vcid, 'vlan': self.vlan3.id}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['virtual_circuit'], self.vc2.vcid)
+        self.assertEqual(response.data['vlan'], self.vlan3.id)
+
+    def test_create_400_missing_params(self):
+        response = self.client.post(self.url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(len(response.data), 2)
+        self.assertIn('virtual_circuit', response.data)
+        self.assertIn('vlan', response.data)
+
+    def test_create_400_existed_vlan(self):
+        data = {'virtual_circuit': self.vc1.vcid, 'vlan': self.vlan1.id}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_patch_200(self):
+        data = {'vlan': self.vlan3.id}
+        response = self.client.patch(f'{self.url}{self.vc1_vlan1.id}/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['virtual_circuit'], self.vc1.vcid)
+        self.assertEqual(response.data['vlan'], self.vlan3.id)
+
+    def test_patch_400_existed_vlan(self):
+        data = {'vlan': self.vlan2.id}
+        response = self.client.patch(f'{self.url}{self.vc1_vlan1.id}/', data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_delete_204(self):
+        response = self.client.delete(f'{self.url}{self.vc1_vlan1.id}/')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_delete_404(self):
+        response = self.client.delete(f'{self.url}{100}/')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
