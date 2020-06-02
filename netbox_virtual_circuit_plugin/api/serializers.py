@@ -1,12 +1,14 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField
-from netbox_virtual_circuit_plugin.models import VirtualCircuit, VirtualCircuitVLAN
+from rest_framework.serializers import ModelSerializer, SerializerMethodField, PrimaryKeyRelatedField
+from netbox_virtual_circuit_plugin.models import VirtualCircuit, VLAN, VirtualCircuitVLAN
 
 
 class VCVLANSerializer(ModelSerializer):
+    vlan_pk = PrimaryKeyRelatedField(queryset=VLAN.objects.all(), source='vlan', write_only=True)
 
     class Meta:
         model = VirtualCircuitVLAN
-        fields = ['vlan']
+        fields = ['vlan', 'vlan_pk']
+        depth = 1
 
 class VirtualCircuitSerializer(ModelSerializer):
     vlans = VCVLANSerializer(many=True)
@@ -16,12 +18,11 @@ class VirtualCircuitSerializer(ModelSerializer):
         fields = ['vcid', 'name', 'status', 'context', 'vlans']
 
     def create(self, validated_data):
-        vlans_data = validated_data.pop('vlans')
+        vlans = validated_data.pop('vlans')
         virtual_circuit = VirtualCircuit.objects.create(**validated_data)
-        for vlan in vlans_data:
+        for vlan in vlans:
             VirtualCircuitVLAN.objects.create(virtual_circuit=virtual_circuit, **vlan)
         return virtual_circuit
-
 
 class VirtualCircuitVLANSerializer(ModelSerializer):
 
