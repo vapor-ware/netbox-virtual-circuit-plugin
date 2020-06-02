@@ -3,11 +3,11 @@ from netbox_virtual_circuit_plugin.models import VirtualCircuit, VLAN, VirtualCi
 
 
 class VCVLANSerializer(ModelSerializer):
-    vlan_pk = PrimaryKeyRelatedField(queryset=VLAN.objects.all(), source='vlan', write_only=True)
+    id = PrimaryKeyRelatedField(queryset=VLAN.objects.all(), source='vlan', write_only=True)
 
     class Meta:
         model = VirtualCircuitVLAN
-        fields = ['vlan', 'vlan_pk']
+        fields = ['id', 'vlan']
         depth = 1
 
 class VirtualCircuitSerializer(ModelSerializer):
