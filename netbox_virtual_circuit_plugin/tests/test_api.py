@@ -39,6 +39,23 @@ class VirtualCircuitEndpointTestCase(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], 2)
+        self.assertEqual(len(response.data['results']), 2)
+
+        vc1 = response.data['results'][0]
+        self.assertEqual(vc1['vcid'], self.vc1.vcid)
+        self.assertEqual(vc1['name'], self.vc1.name)
+        self.assertEqual(vc1['status'], self.vc1.status)
+        self.assertEqual(vc1['context'], self.vc1.context)
+        self.assertEqual(len(vc1['vlans']), 2)
+        self.assertEqual(vc1['vlans'][0]['vlan'], self.vlan1.id)
+        self.assertEqual(vc1['vlans'][1]['vlan'], self.vlan2.id)
+
+        vc2 = response.data['results'][1]
+        self.assertEqual(vc2['vcid'], self.vc2.vcid)
+        self.assertEqual(vc2['name'], self.vc2.name)
+        self.assertEqual(vc2['status'], self.vc2.status)
+        self.assertEqual(vc2['context'], self.vc2.context)
+        self.assertEqual(len(vc2['vlans']), 0)
 
     def test_get_200(self):
         response = self.client.get(f'{self.url}{self.vc1.vcid}/')
@@ -174,6 +191,16 @@ class VCVLANEndpointTestCase(TestCase):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['count'], 2)
+
+        vc1_vlan1 = response.data['results'][0]
+        self.assertEqual(vc1_vlan1['id'], self.vc1_vlan1.id)
+        self.assertEqual(vc1_vlan1['virtual_circuit'], self.vc1_vlan1.virtual_circuit.vcid)
+        self.assertEqual(vc1_vlan1['vlan'], self.vc1_vlan1.vlan.id)
+
+        vc2_vlan2 = response.data['results'][1]
+        self.assertEqual(vc2_vlan2['id'], self.vc2_vlan2.id)
+        self.assertEqual(vc2_vlan2['virtual_circuit'], self.vc2_vlan2.virtual_circuit.vcid)
+        self.assertEqual(vc2_vlan2['vlan'], self.vc2_vlan2.vlan.id)
 
     def test_get_200(self):
         response = self.client.get(f'{self.url}{self.vc1_vlan1.id}/')
