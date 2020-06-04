@@ -3,6 +3,6 @@ from .views import VirtualCircuitViewSet, VirtualCircuitVLANViewSet
 
 
 router = routers.DefaultRouter()
-router.register('virtual-circuits', VirtualCircuitViewSet, 'vcid')
-router.register('vlans', VirtualCircuitVLANViewSet)
+router.register(r'virtual-circuits', VirtualCircuitViewSet, 'vcid')
+router.register(r'vlans', VirtualCircuitVLANViewSet)
 urlpatterns = router.urls
