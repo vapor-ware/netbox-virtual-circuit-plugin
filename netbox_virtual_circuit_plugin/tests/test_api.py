@@ -153,11 +153,10 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(vlan5['name'], self.vlan5.name)
         self.assertEqual(vlan5['status'], self.vlan5.status)
 
-    # def test_create_400_existed_vlan(self):
-    #     # FIXME - this fails because of TypeError: argument of type 'QuerySet' is not iterable?
-    #     data = {'vcid': 6, 'name': 'foo', 'context': 'bar', 'vlans': [{'id': self.vlan1.id}]}
-    #     response = self.client.post(self.url, data, format='json')
-    #     self.assertEqual(response.status_code, status.HTTP_500_INTERNAL_SERVER_ERROR)
+    def test_create_400_existed_vlan(self):
+        data = {'vcid': 6, 'name': 'foo', 'context': 'bar', 'vlans': [{'id': self.vlan1.id}]}
+        response = self.client.post(self.url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_400_non_existent_vlan(self):
         data = {'vcid': 7, 'name': 'foo', 'context': 'bar', 'vlans': [{'id': 400}]}

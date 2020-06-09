@@ -1,4 +1,4 @@
-from rest_framework.serializers import ModelSerializer, SerializerMethodField, PrimaryKeyRelatedField
+from rest_framework.serializers import ModelSerializer, SerializerMethodField, PrimaryKeyRelatedField, ValidationError
 from netbox_virtual_circuit_plugin.models import VirtualCircuit, VLAN, VirtualCircuitVLAN
 
 
@@ -21,6 +21,13 @@ class VirtualCircuitSerializer(ModelSerializer):
         vlans = validated_data.pop('vlans')
         virtual_circuit = VirtualCircuit.objects.create(**validated_data)
         for vlan in vlans:
+            try:
+              ret = VirtualCircuitVLAN.objects.get(vlan=vlan.get('vlan'))
+              if ret:
+                  raise ValidationError({'id': f'VLAN {ret.vlan} is already assigned to Virtual Circuit {ret.virtual_circuit}'})
+            except VirtualCircuitVLAN.DoesNotExist:
+                pass
+
             VirtualCircuitVLAN.objects.create(virtual_circuit=virtual_circuit, **vlan)
         return virtual_circuit
 
