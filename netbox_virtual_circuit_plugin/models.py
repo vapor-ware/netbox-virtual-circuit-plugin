@@ -27,7 +27,9 @@ class VirtualCircuit(models.Model):
         ordering = ['vcid']
 
     def __str__(self):
-        return self.name
+        if self.vcid and self.name:
+            return f'{self.vcid} ({self.name})'
+        return None
 
 
 class VirtualCircuitVLAN(models.Model):
