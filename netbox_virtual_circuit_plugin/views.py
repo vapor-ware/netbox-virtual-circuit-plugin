@@ -35,7 +35,7 @@ class CreateVirtualCircuitView(ObjectEditView):
     queryset = VirtualCircuit.objects.all()
     model_form =  VirtualCircuitForm
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_edit.html'
-    default_return_url = 'plugins:netbox_virtual_circuit_plugin:list_virtual_circuits'
+    default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
 
 class CreateVirtualCircuitVLANView(ObjectEditView):
     permission_required = 'netbox_virtual_circuit_plugin.add_virtualcircuitvlan'
@@ -43,4 +43,4 @@ class CreateVirtualCircuitVLANView(ObjectEditView):
     queryset = VirtualCircuitVLAN.objects.all()
     model_form =  VirtualCircuitVLANForm
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_vlan_edit.html'
-    default_return_url = 'plugins:netbox_virtual_circuit_plugin:list_virtual_circuits' # FIXME
+    default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
