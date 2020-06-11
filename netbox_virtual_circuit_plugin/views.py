@@ -4,7 +4,7 @@ from django.views.generic import View
 from utilities.views import ObjectEditView
 
 from .models import VirtualCircuit, VirtualCircuitVLAN, VLAN
-from .forms import VirtualCircuitForm
+from .forms import VirtualCircuitForm, VirtualCircuitVLANForm
 
 
 class ListVirtualCircuitsView(View):
@@ -36,3 +36,11 @@ class CreateVirtualCircuitView(ObjectEditView):
     model_form =  VirtualCircuitForm
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_edit.html'
     default_return_url = 'plugins:netbox_virtual_circuit_plugin:list_virtual_circuits'
+
+class CreateVirtualCircuitVLANView(ObjectEditView):
+    permission_required = 'netbox_virtual_circuit_plugin.add_virtualcircuitvlan'
+    model = VirtualCircuitVLAN
+    queryset = VirtualCircuitVLAN.objects.all()
+    model_form =  VirtualCircuitVLANForm
+    template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_vlan_edit.html'
+    default_return_url = 'plugins:netbox_virtual_circuit_plugin:list_virtual_circuits' # FIXME

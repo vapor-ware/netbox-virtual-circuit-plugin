@@ -25,6 +25,8 @@ class VirtualCircuit(models.Model):
 
     class Meta:
         ordering = ['vcid']
+        verbose_name = 'Virtual Circuit'
+        verbose_name_plural = 'Virtual Circuits'
 
     def __str__(self):
         if self.vcid and self.name:
@@ -48,3 +50,5 @@ class VirtualCircuitVLAN(models.Model):
 
     class Meta:
         ordering = ['virtual_circuit']
+        verbose_name = 'Virtual-Circuit-to-VLAN connection'
+        verbose_name_plural = 'Virtual-Circuit-to-VLAN connections'

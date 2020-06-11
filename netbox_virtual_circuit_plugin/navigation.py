@@ -8,7 +8,6 @@ menu_items = (
         link_text='Virtual Circuits',
         permissions=[],
         buttons=(
-            # TODO
             PluginMenuButton(
                 link='plugins:netbox_virtual_circuit_plugin:virtualcircuit_add',
                 title='Add a new virtual circuit',
@@ -16,9 +15,8 @@ menu_items = (
                 color=ButtonColorChoices.GREEN,
                 permissions=['netbox_virtual_circuit_plugin.add_virtualcircuit']
             ),
-            # TODO
             PluginMenuButton(
-                link='admin:netbox_virtual_circuit_plugin_virtualcircuitvlan_add',
+                link='plugins:netbox_virtual_circuit_plugin:virtualcircuitvlan_add',
                 title='Assign a virtual circuit to a VLAN',
                 icon_class='fa fa-plus',
                 color=ButtonColorChoices.BLUE,
