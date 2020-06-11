@@ -3,7 +3,8 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import View
 from utilities.views import ObjectEditView, ObjectListView
 
-from .forms import VirtualCircuitForm, VirtualCircuitVLANForm
+from .filters import VirtualCircuitFilter
+from .forms import VirtualCircuitForm, VirtualCircuitVLANForm, VirtualCircuitFilterForm
 from .models import VirtualCircuit, VirtualCircuitVLAN, VLAN
 from .tables import VirtualCircuitTable
 
@@ -24,8 +25,8 @@ class VirtualCircuitView(View):
 class VirtualCircuitListView(ObjectListView):
     permission_required = 'netbox_virtual_circuit_plugin.view_virtualcircuit'
     queryset = VirtualCircuit.objects.all()
-    # filterset = VirtualCircuitFilter
-    # filterset_form = VirtualCircuitFilterForm
+    filterset = VirtualCircuitFilter
+    filterset_form = VirtualCircuitFilterForm
     table = VirtualCircuitTable
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_list.html'
 
