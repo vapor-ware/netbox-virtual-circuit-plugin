@@ -8,15 +8,15 @@ menu_items = (
         link_text='Virtual Circuits',
         permissions=[],
         buttons=(
-            # Link to the admin view to add a virtual circuit if user has "add_virtualcircuit" permission.
+            # TODO
             PluginMenuButton(
-                link='admin:netbox_virtual_circuit_plugin_virtualcircuit_add',
+                link='plugins:netbox_virtual_circuit_plugin:virtualcircuit_add',
                 title='Add a new virtual circuit',
                 icon_class='fa fa-plus',
                 color=ButtonColorChoices.GREEN,
                 permissions=['netbox_virtual_circuit_plugin.add_virtualcircuit']
             ),
-            # Links to the admin view to assign a virtual circuit to a VLAN if user has the "add_virtualcircuitvlan" permission.
+            # TODO
             PluginMenuButton(
                 link='admin:netbox_virtual_circuit_plugin_virtualcircuitvlan_add',
                 title='Assign a virtual circuit to a VLAN',

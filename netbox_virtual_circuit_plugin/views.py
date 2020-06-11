@@ -1,6 +1,10 @@
 from django.shortcuts import get_object_or_404, get_list_or_404, render
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import View
+from utilities.views import ObjectEditView
+
 from .models import VirtualCircuit, VirtualCircuitVLAN, VLAN
+from .forms import VirtualCircuitForm
 
 
 class ListVirtualCircuitsView(View):
@@ -24,3 +28,11 @@ class VirtualCircuitView(View):
             'virtual_circuit': vc,
             'vlans': vlans,
         })
+
+class CreateVirtualCircuitView(ObjectEditView):
+    permission_required = 'netbox_virtual_circuit_plugin.add_virtualcircuit'
+    model = VirtualCircuit
+    queryset = VirtualCircuit.objects.all()
+    model_form =  VirtualCircuitForm
+    template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_edit.html'
+    default_return_url = 'plugins:netbox_virtual_circuit_plugin:list_virtual_circuits'
