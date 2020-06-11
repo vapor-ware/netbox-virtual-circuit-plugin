@@ -6,7 +6,7 @@ menu_items = (
     PluginMenuItem(
         link='plugins:netbox_virtual_circuit_plugin:virtual_circuit_list',
         link_text='Virtual Circuits',
-        permissions=[],
+        permissions=['netbox_virtual_circuit_plugin.view_virtualcircuit'],
         buttons=(
             PluginMenuButton(
                 link='plugins:netbox_virtual_circuit_plugin:virtual_circuit_add',

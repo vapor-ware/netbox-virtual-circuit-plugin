@@ -1,20 +1,12 @@
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import View
-from utilities.views import ObjectEditView
+from utilities.views import ObjectEditView, ObjectListView
 
-from .models import VirtualCircuit, VirtualCircuitVLAN, VLAN
 from .forms import VirtualCircuitForm, VirtualCircuitVLANForm
+from .models import VirtualCircuit, VirtualCircuitVLAN, VLAN
+from .tables import VirtualCircuitTable
 
-
-class ListVirtualCircuitsView(View):
-    """List all virtual circuits."""
-
-    def get(self, request):
-        vcs = VirtualCircuit.objects.all()
-        return render(request, 'netbox_virtual_circuit_plugin/virtual_circuit_list.html', {
-            'virtual_circuits': vcs,
-        })
 
 class VirtualCircuitView(View):
     """Single virtual circuits view, identified by ID."""
@@ -29,7 +21,15 @@ class VirtualCircuitView(View):
             'vlans': vlans,
         })
 
-class CreateVirtualCircuitView(ObjectEditView):
+class VirtualCircuitListView(ObjectListView):
+    permission_required = 'netbox_virtual_circuit_plugin.view_virtualcircuit'
+    queryset = VirtualCircuit.objects.all()
+    # filterset = VirtualCircuitFilter
+    # filterset_form = VirtualCircuitFilterForm
+    table = VirtualCircuitTable
+    template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_list.html'
+
+class VirtualCircuitCreateView(ObjectEditView):
     permission_required = 'netbox_virtual_circuit_plugin.add_virtualcircuit'
     model = VirtualCircuit
     queryset = VirtualCircuit.objects.all()
@@ -37,7 +37,7 @@ class CreateVirtualCircuitView(ObjectEditView):
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_edit.html'
     default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
 
-class CreateVirtualCircuitVLANView(ObjectEditView):
+class VirtualCircuitVLANCreateView(ObjectEditView):
     permission_required = 'netbox_virtual_circuit_plugin.add_virtualcircuitvlan'
     model = VirtualCircuitVLAN
     queryset = VirtualCircuitVLAN.objects.all()
