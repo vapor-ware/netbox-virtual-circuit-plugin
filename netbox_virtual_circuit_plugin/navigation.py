@@ -15,13 +15,6 @@ menu_items = (
                 color=ButtonColorChoices.GREEN,
                 permissions=['netbox_virtual_circuit_plugin.add_virtualcircuit']
             ),
-            PluginMenuButton(
-                link='plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_add',
-                title='Assign a virtual circuit to a VLAN',
-                icon_class='fa fa-plus',
-                color=ButtonColorChoices.BLUE,
-                permissions=['netbox_virtual_circuit_plugin.add_virtualcircuitvlan']
-            ),
         )
     ),
 )

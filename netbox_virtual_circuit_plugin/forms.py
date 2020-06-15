@@ -17,12 +17,6 @@ class VirtualCircuitForm(BootstrapMixin, forms.ModelForm):
             'status',
             'context',
         ]
-        help_texts = {
-            'vcid': 'Configured Virtual Circuit ID',
-            'name': 'Configured Virtual Circuit name',
-            'status': 'Operational status of this Virtual Circuit',
-            'context': 'Context of this Virtual Circuit',
-        }
 
 class VirtualCircuitFilterForm(BootstrapMixin, forms.ModelForm):
     q = forms.CharField(
@@ -54,7 +48,3 @@ class VirtualCircuitVLANForm(BootstrapMixin, forms.ModelForm):
             'virtual_circuit',
             'vlan',
         ]
-        help_texts = {
-            'virtual_circuit': 'Any Virtual Circuit',
-            'vlan': 'Any unassigned VLAN',
-        }

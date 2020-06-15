@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
+{% block header %}
+    <div class="pull-right noprint">
+        <a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_add' %}?virtual_circuit={{ virtual_circuit.vcid }}" class="btn btn-primary">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Assign a VLAN
+        </a>
+    </div>
+{% endblock %}
+
 {% block content %}
 {% with config=settings.PLUGINS_CONFIG.netbox_virtual_circuit_plugin %}
     <h1>Virtual Circuit {{ virtual_circuit.vcid }} ({{ virtual_circuit.name }})</h1>
