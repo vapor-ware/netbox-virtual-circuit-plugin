@@ -5,21 +5,19 @@
     <h1>Virtual Circuit {{ virtual_circuit.vcid }} ({{ virtual_circuit.name }})</h1>
     <table class="table table-hover panel-body attr-table">
         <tr style="background-color:#f8f8f8;">
-            <th> ID </th>
-            <th> Name </th>
+            <th> VLAN </th>
             <th> Status </th>
             <th> Interface </th>
         </tr>
         {% for vlan in vlans %}
         <tr>
-            <td><a href="{% url 'ipam:vlan_list' %}{{ vlan.pk }}">{{ vlan.vid }}</a></td>
-            <td>{{ vlan.name }}</td>
+            <td><a href="{% url 'ipam:vlan_list' %}{{ vlan.pk }}">{{ vlan.vid }} ({{ vlan.name }})</a></td>
             <td>{{ vlan.status }}</td>
             <td>{{ vlan.get_members.0 }}</td> <!-- NOTE: get only the first member due to Vapor's specific use case -->
         </tr>
         {% empty %}
         <tr>
-            <td>No VLANs found!</td>
+            <td>No VLAN has been assigned yet!</td>
         </tr>
     {% endfor %}
     </table>
