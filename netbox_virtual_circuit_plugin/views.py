@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import View
-from utilities.views import ObjectEditView, ObjectListView
+from utilities.views import BulkDeleteView, ObjectEditView, ObjectListView
 
 from .filters import VirtualCircuitFilter
 from .forms import VirtualCircuitForm, VirtualCircuitVLANForm, VirtualCircuitFilterForm
@@ -36,6 +36,12 @@ class VirtualCircuitCreateView(ObjectEditView):
     queryset = VirtualCircuit.objects.all()
     model_form =  VirtualCircuitForm
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_edit.html'
+    default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
+
+class VirtualCircuitBulkDeleteView(BulkDeleteView):
+    permission_required = 'netbox_virtual_circuit_plugin.delete_virtualcircuit'
+    queryset = VirtualCircuit.objects.filter()
+    table = VirtualCircuitTable
     default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
 
 class VirtualCircuitVLANCreateView(ObjectEditView):
