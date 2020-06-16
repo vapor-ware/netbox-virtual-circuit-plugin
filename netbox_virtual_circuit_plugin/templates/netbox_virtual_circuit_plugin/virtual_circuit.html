@@ -21,7 +21,7 @@
         {% for vlan in vlans %}
         <tr>
             <td><a href="{% url 'ipam:vlan_list' %}{{ vlan.pk }}">{{ vlan.vid }} ({{ vlan.name }})</a></td>
-            <td>{{ vlan.status }}</td>
+            <td><span class="label label-{{ vlan.get_status_class }}">{{ vlan.get_status_display }}</span></td>
             <td>{{ vlan.get_members.0 }}</td> <!-- NOTE: get only the first member due to Vapor's specific use case -->
         </tr>
         {% empty %}
