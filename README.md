@@ -18,6 +18,14 @@ statuses:
 When a VLAN is assigned to a Virtual Circuit, it can not exist in another Virtual
 Circuit without first being removed.
 
+## Screenshots
+
+| |
+|:-------------------------:|
+| ![Navigation view](docs/images/1_navigation.png) | ![Add a Virtual Circuit](docs/images/2_add.png) |
+| ![List all Virtual Circuits](docs/images/3_list.png) | ![Assign a VLAN to a Virtual Circuit](docs/images/5_assign_vlan.png) |
+| ![Virtual Circuit Single View (2 VLANs assigned)](docs/images/6_assigned_vlans.png) | ![List of all connections](docs/images/7_connections.png) |
+
 ## Installing
 
 Since the plugin is published on
