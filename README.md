@@ -23,8 +23,8 @@ Circuit without first being removed.
 | |
 |:-------------------------:|
 | ![Navigation view](docs/images/1_navigation.png) | ![Add a Virtual Circuit](docs/images/2_add.png) |
-| ![List all Virtual Circuits](docs/images/3_list.png) | ![Assign a VLAN to a Virtual Circuit](docs/images/5_assign_vlan.png) |
-| ![Virtual Circuit Single View (2 VLANs assigned)](docs/images/6_assigned_vlans.png) | ![List of all connections](docs/images/7_connections.png) |
+| ![List all Virtual Circuits](docs/images/3_list.png) | ![Assign a VLAN to a Virtual Circuit](docs/images/4_assign_vlan.png) |
+| ![Virtual Circuit Single View (2 VLANs assigned)](docs/images/5_assigned_vlans.png) | ![List of all connections](docs/images/6_connections.png) |
 
 ## Installing
 
