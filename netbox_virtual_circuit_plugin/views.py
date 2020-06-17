@@ -6,7 +6,7 @@ from utilities.views import BulkDeleteView, ObjectEditView, ObjectListView
 from .filters import VirtualCircuitFilter
 from .forms import VirtualCircuitForm, VirtualCircuitVLANForm, VirtualCircuitFilterForm
 from .models import VirtualCircuit, VirtualCircuitVLAN, VLAN
-from .tables import VirtualCircuitTable
+from .tables import VirtualCircuitTable, VirtualCircuitVLANTable
 
 
 class VirtualCircuitView(View):
@@ -43,6 +43,12 @@ class VirtualCircuitBulkDeleteView(BulkDeleteView):
     queryset = VirtualCircuit.objects.filter()
     table = VirtualCircuitTable
     default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
+
+class VirtualCircuitVLANListView(ObjectListView):
+    permission_required = 'netbox_virtual_circuit_plugin.view_virtualcircuitvlan'
+    queryset = VirtualCircuitVLAN.objects.all()
+    table = VirtualCircuitVLANTable
+    template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_vlan_list.html'
 
 class VirtualCircuitVLANCreateView(ObjectEditView):
     permission_required = 'netbox_virtual_circuit_plugin.add_virtualcircuitvlan'

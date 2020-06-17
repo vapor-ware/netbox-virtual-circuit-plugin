@@ -8,10 +8,10 @@ class VirtualCircuit(models.Model):
 
     vcid = models.PositiveSmallIntegerField(
         primary_key=True,
-        verbose_name='ID'
+        verbose_name='ID',
     )
     name = models.CharField(
-        max_length=64
+        max_length=64,
     )
     status = models.CharField(
         max_length=30,
@@ -20,7 +20,7 @@ class VirtualCircuit(models.Model):
     )
     context = models.CharField(
         max_length=100,
-        blank=True
+        blank=True,
     )
 
     class Meta:
@@ -40,12 +40,14 @@ class VirtualCircuitVLAN(models.Model):
     virtual_circuit = models.ForeignKey(
         to=VirtualCircuit,
         on_delete=models.CASCADE,
-        related_name='vlans'
+        related_name='vlans',
+        verbose_name='Virtual Circuit',
     )
     vlan = models.OneToOneField(
         to=VLAN,
         on_delete=models.CASCADE,
-        related_name='vlan_of'
+        related_name='vlan_of',
+        verbose_name='VLAN',
     )
 
     class Meta:

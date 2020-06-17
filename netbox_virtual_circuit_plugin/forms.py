@@ -40,10 +40,6 @@ class VirtualCircuitVLANForm(BootstrapMixin, forms.ModelForm):
 
     class Meta:
         model = VirtualCircuitVLAN
-        labels = {
-            'virtual_circuit': 'Virtual Circuit',
-            'vlan': 'VLAN',
-        }
         fields = [
             'virtual_circuit',
             'vlan',

@@ -17,4 +17,18 @@ menu_items = (
             ),
         )
     ),
+    PluginMenuItem(
+        link='plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_list',
+        link_text='Connections',
+        permissions=['netbox_virtual_circuit_plugin.view_virtualcircuitvlan'],
+        buttons=(
+            PluginMenuButton(
+                link='plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_add',
+                title='Assign a VLAN to a Virtual Circuit',
+                icon_class='fa fa-plus',
+                color=ButtonColorChoices.GREEN,
+                permissions=['netbox_virtual_circuit_plugin.add_virtualcircuitvlan']
+            ),
+        )
+    ),
 )
