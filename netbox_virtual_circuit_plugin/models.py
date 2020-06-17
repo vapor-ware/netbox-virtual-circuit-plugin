@@ -29,10 +29,7 @@ class VirtualCircuit(models.Model):
         verbose_name_plural = 'Virtual Circuits'
 
     def __str__(self):
-        if self.vcid and self.name:
-            return f'{self.vcid} ({self.name})'
-        return None
-
+        return f'{self.vcid} ({self.name})'
 
 class VirtualCircuitVLAN(models.Model):
     """Virtual Circuit to VLAN relationship."""

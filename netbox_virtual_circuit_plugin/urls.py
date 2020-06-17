@@ -7,7 +7,9 @@ urlpatterns = (
     path('', views.VirtualCircuitListView.as_view(), name='virtual_circuit_list'),
     path("add/", views.VirtualCircuitCreateView.as_view(), name='virtual_circuit_add'),
     path("delete/", views.VirtualCircuitBulkDeleteView.as_view(), name='virtual_circuit_bulk_delete'),
-    path('<int:vcid>/', views.VirtualCircuitView.as_view(), name='virtual_circuit'),
+    path('<int:pk>/', views.VirtualCircuitView.as_view(), name='virtual_circuit'),
+    path('<int:pk>/edit/', views.VirtualCircuitEditView.as_view(), name='virtual_circuit_edit'),
+    path('<int:pk>/delete/', views.VirtualCircuitDeleteView.as_view(), name='virtual_circuit_delete'),
 
     # Virtual-Circuit-to-VLAN connections.
     path("vlan/", views.VirtualCircuitVLANListView.as_view(), name='virtual_circuit_vlan_list'),

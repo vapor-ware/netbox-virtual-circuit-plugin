@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import View
-from utilities.views import BulkDeleteView, ObjectEditView, ObjectListView
+from utilities.views import BulkDeleteView, ObjectEditView, ObjectListView, ObjectDeleteView
 
 from .filters import VirtualCircuitFilter
 from .forms import VirtualCircuitForm, VirtualCircuitVLANForm, VirtualCircuitFilterForm
@@ -12,8 +12,8 @@ from .tables import VirtualCircuitTable, VirtualCircuitVLANTable
 class VirtualCircuitView(View):
     """Single virtual circuits view, identified by ID."""
 
-    def get(self, request, vcid):
-        vc = get_object_or_404(VirtualCircuit.objects.filter(vcid=vcid))
+    def get(self, request, pk):
+        vc = get_object_or_404(VirtualCircuit.objects.filter(vcid=pk))
         vlan_ids = VirtualCircuitVLAN.objects.filter(virtual_circuit=vc).values_list('vlan_id', flat=True)
         vlans = [VLAN.objects.get(pk=vid) for vid in vlan_ids]
 
@@ -36,6 +36,14 @@ class VirtualCircuitCreateView(ObjectEditView):
     queryset = VirtualCircuit.objects.all()
     model_form =  VirtualCircuitForm
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_edit.html'
+    default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
+
+class VirtualCircuitEditView(VirtualCircuitCreateView):
+    permission_required = 'netbox_virtual_circuit_plugin.change_virtualcircuit'
+
+class VirtualCircuitDeleteView(ObjectDeleteView):
+    permission_required = 'netbox_virtual_circuit_plugin.delete_virtualcircuit'
+    model = VirtualCircuit
     default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
 
 class VirtualCircuitBulkDeleteView(BulkDeleteView):
