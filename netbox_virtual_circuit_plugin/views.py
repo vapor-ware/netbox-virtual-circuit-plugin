@@ -56,4 +56,10 @@ class VirtualCircuitVLANCreateView(ObjectEditView):
     queryset = VirtualCircuitVLAN.objects.all()
     model_form =  VirtualCircuitVLANForm
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_vlan_edit.html'
-    default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
+    default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_list'
+
+class VirtualCircuitVLANBulkDeleteView(BulkDeleteView):
+    permission_required = 'netbox_virtual_circuit_plugin.delete_virtualcircuitvlan'
+    queryset = VirtualCircuitVLAN.objects.filter()
+    table = VirtualCircuitVLANTable
+    default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_list'

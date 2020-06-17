@@ -12,4 +12,5 @@ urlpatterns = (
     # Virtual-Circuit-to-VLAN connections.
     path("vlan/", views.VirtualCircuitVLANListView.as_view(), name='virtual_circuit_vlan_list'),
     path("vlan/add/", views.VirtualCircuitVLANCreateView.as_view(), name='virtual_circuit_vlan_add'),
+    path("vlan/delete/", views.VirtualCircuitVLANBulkDeleteView.as_view(), name='virtual_circuit_vlan_bulk_delete'),
 )
