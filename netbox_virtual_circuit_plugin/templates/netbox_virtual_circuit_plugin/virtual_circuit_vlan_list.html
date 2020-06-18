@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load buttons %}
+
+{% block content %}
+<div class="pull-right noprint">
+    {% add_button 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_add' %}
+</div>
+<h1>{% block title %}Connections{% endblock %}</h1>
+<div class="row">
+	<div class="col-md-12">
+        {% include 'utilities/obj_table.html' with bulk_delete_url='plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_bulk_delete' %}
+    </div>
+</div>
+{% endblock %}
