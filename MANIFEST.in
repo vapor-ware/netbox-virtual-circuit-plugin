@@ -1,1 +1,2 @@
 recursive-include netbox_virtual_circuit_plugin *
+recursive-include docs *
