@@ -36,7 +36,6 @@ PLUGINS = ['netbox_virtual_circuit_plugin'] # Note that the name here use unders
 Don't forget to restart NetBox to load the new plugin.
 
 You might also have to manually run the database migrations for Netbox to create the appropriate tables for virtual circuits.
-
 ```bash
 python3 manage.py migrate
 ```
@@ -70,6 +69,7 @@ based on `Makefile`, including the following commands:
 clean            Clean up build artifacts
 deploy           Run a local development deployment of the plugin with NetBox
 docker           Build a local docker image
+github-tag       Create and push a tag with the current version
 help             Print usage information
 release          Package and distribute the current release to PyPI
 test             Run unit tests
