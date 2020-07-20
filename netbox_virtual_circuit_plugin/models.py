@@ -1,14 +1,20 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from ipam.models import VLAN
+
 from .choices import VirtualCircuitStatusChoices
 
 
 class VirtualCircuit(models.Model):
     """Virtual Circuit model."""
 
-    vcid = models.PositiveSmallIntegerField(
+    vcid = models.BigIntegerField(
         primary_key=True,
         verbose_name='ID',
+        validators=[
+            MaxValueValidator(4294967295),
+            MinValueValidator(1),
+        ],
     )
     name = models.CharField(
         max_length=64,
@@ -16,7 +22,7 @@ class VirtualCircuit(models.Model):
     status = models.CharField(
         max_length=30,
         choices=VirtualCircuitStatusChoices,
-        default=VirtualCircuitStatusChoices.STATUS_PENDING_CONFIGURATION
+        default=VirtualCircuitStatusChoices.STATUS_PENDING_CONFIGURATION,
     )
     context = models.CharField(
         max_length=100,
