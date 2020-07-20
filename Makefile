@@ -24,7 +24,7 @@ release: clean  ## Package and distribute the current release to PyPI
 	python3 -m twine upload dist/*
 
 test: docker  ## Run unit tests
-	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} run netbox sh -c "python manage.py test netbox_virtual_circuit_plugin"
+	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} run netbox sh -c "python manage.py test ${IMAGE_NAME}"
 
 version:  ## Print the version
 	@echo "${PKG_VERSION}"
