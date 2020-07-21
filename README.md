@@ -70,7 +70,9 @@ based on `Makefile`, including the following commands:
 clean            Clean up build artifacts
 deploy           Run a local development deployment of the plugin with NetBox
 docker           Build a local docker image
+github-tag       Create and push a tag with the current version
 help             Print usage information
+migrate          Run makemigrations in Django and produce a migration file locally
 release          Package and distribute the current release to PyPI
 test             Run unit tests
 version          Print the version

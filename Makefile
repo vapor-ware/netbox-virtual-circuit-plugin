@@ -3,7 +3,7 @@ PKG_VERSION  :=  $(shell python setup.py --version)
 IMAGE_NAME   := netbox_virtual_circuit_plugin
 COMPOSE_FILE := dev/docker-compose.yml
 
-.PHONY: clean deploy docker github-tag release test version help
+.PHONY: clean deploy docker github-tag migrate release test version help
 .DEFAULT_GOAL := help
 
 clean:  ## Clean up build artifacts
@@ -19,12 +19,15 @@ github-tag:  ## Create and push a tag with the current version
 	git tag -a v${PKG_VERSION} -m "${PKG_NAME} version v${PKG_VERSION}"
 	git push -u origin v${PKG_VERSION}
 
+migrate: docker  ## Run makemigrations in Django and produce a migration file locally
+	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} run -u root netbox sh -c "python manage.py makemigrations ${IMAGE_NAME}"
+
 release: clean  ## Package and distribute the current release to PyPI
 	python3 setup.py sdist bdist_wheel
 	python3 -m twine upload dist/*
 
 test: docker  ## Run unit tests
-	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} run netbox sh -c "python manage.py test netbox_virtual_circuit_plugin"
+	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} run netbox sh -c "python manage.py test ${IMAGE_NAME}"
 
 version:  ## Print the version
 	@echo "${PKG_VERSION}"
