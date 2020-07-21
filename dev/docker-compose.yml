@@ -16,6 +16,7 @@ services:
     user: '101'
     volumes:
       - ./configuration.py:/opt/netbox/netbox/netbox/configuration.py
+      - ../netbox_virtual_circuit_plugin/migrations:/netbox-virtual-circuit-plugin/netbox_virtual_circuit_plugin/migrations
     tty: true
 
   worker:
