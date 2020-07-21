@@ -36,7 +36,6 @@ PLUGINS = ['netbox_virtual_circuit_plugin'] # Note that the name here use unders
 Don't forget to restart NetBox to load the new plugin.
 
 You might also have to manually run the database migrations for Netbox to create the appropriate tables for virtual circuits.
-
 ```bash
 python3 manage.py migrate
 ```
