@@ -1,10 +1,14 @@
 PKG_NAME     := $(shell python setup.py --name)
-PKG_VERSION  :=  $(shell python setup.py --version)
+PKG_VERSION  := $(shell python setup.py --version)
+PKG_ORG      := vapor-ware
 IMAGE_NAME   := netbox_virtual_circuit_plugin
 COMPOSE_FILE := dev/docker-compose.yml
 
 .PHONY: clean deploy docker github-tag migrate release test version help
 .DEFAULT_GOAL := help
+
+changelog:  ## Generate a changelog file from GitHub Issue Tracker
+	github_changelog_generator -u ${PKG_ORG} -p ${PKG_NAME}
 
 clean:  ## Clean up build artifacts
 	rm -rf build/ dist/ *.egg-info

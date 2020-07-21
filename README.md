@@ -66,6 +66,7 @@ documentation](https://netbox.readthedocs.io/en/stable/plugins/development/).
 To help setup the development environment, it comes with a CLI helper
 based on `Makefile`, including the following commands:
 ```
+changelog        Generate a changelog file from GitHub Issue Tracker
 clean            Clean up build artifacts
 deploy           Run a local development deployment of the plugin with NetBox
 docker           Build a local docker image
