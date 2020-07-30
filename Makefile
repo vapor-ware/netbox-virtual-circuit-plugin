@@ -24,7 +24,7 @@ github-tag:  ## Create and push a tag with the current version
 	git push -u origin v${PKG_VERSION}
 
 migrate: docker  ## Run makemigrations in Django and produce a migration file locally
-	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} run -u root netbox sh -c "python manage.py makemigrations ${IMAGE_NAME}"
+	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} run -u root netbox sh -c "python manage.py makemigrations ${IMAGE_NAME} --name changelog"
 
 release: clean  ## Package and distribute the current release to PyPI
 	python3 setup.py sdist bdist_wheel
