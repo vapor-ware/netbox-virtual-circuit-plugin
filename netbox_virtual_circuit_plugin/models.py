@@ -1,11 +1,13 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.urls import reverse
 from ipam.models import VLAN
+from utilities.models import ChangeLoggedModel
 
 from .choices import VirtualCircuitStatusChoices
 
 
-class VirtualCircuit(models.Model):
+class VirtualCircuit(ChangeLoggedModel):
     """Virtual Circuit model."""
 
     vcid = models.BigIntegerField(
@@ -37,7 +39,10 @@ class VirtualCircuit(models.Model):
     def __str__(self):
         return f'{self.vcid} ({self.name})'
 
-class VirtualCircuitVLAN(models.Model):
+    def get_absolute_url(self):
+        return reverse('plugins:netbox_virtual_circuit_plugin:virtual_circuit', args=[self.vcid])
+
+class VirtualCircuitVLAN(ChangeLoggedModel):
     """Virtual Circuit to VLAN relationship."""
 
     virtual_circuit = models.ForeignKey(
@@ -57,3 +62,6 @@ class VirtualCircuitVLAN(models.Model):
         ordering = ['virtual_circuit']
         verbose_name = 'Virtual-Circuit-to-VLAN connection'
         verbose_name_plural = 'Virtual-Circuit-to-VLAN connections'
+
+    def get_absolute_url(self):
+        return reverse('plugins:netbox_virtual_circuit_plugin:virtual_circuit', args=[self.virtual_circuit.vcid])
