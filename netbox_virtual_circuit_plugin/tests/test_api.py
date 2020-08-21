@@ -48,17 +48,13 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(vc1['context'], self.vc1.context)
         self.assertEqual(len(vc1['vlans']), 2)
 
-        vlan1 = vc1['vlans'][0]['vlan']
-        self.assertEqual(vlan1['id'], self.vlan1.id)
-        self.assertEqual(vlan1['vid'], self.vlan1.vid)
-        self.assertEqual(vlan1['name'], self.vlan1.name)
-        self.assertEqual(vlan1['status'], self.vlan1.status)
+        vlan1 = vc1['vlans'][0]
+        self.assertEqual(vlan1['id'], self.vc1_vlan1.id)
+        self.assertEqual(vlan1['vlan'], self.vlan1.id)
 
-        vlan2 = vc1['vlans'][1]['vlan']
-        self.assertEqual(vlan2['id'], self.vlan2.id)
-        self.assertEqual(vlan2['vid'], self.vlan2.vid)
-        self.assertEqual(vlan2['name'], self.vlan2.name)
-        self.assertEqual(vlan2['status'], self.vlan2.status)
+        vlan2 = vc1['vlans'][1]
+        self.assertEqual(vlan2['id'], self.vc1_vlan2.id)
+        self.assertEqual(vlan2['vlan'], self.vlan2.id)
 
         vc2 = response.data['results'][1]
         self.assertEqual(vc2['vcid'], self.vc2.vcid)
@@ -76,17 +72,13 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(response.data['context'], '')
         self.assertEqual(len(response.data['vlans']), 2)
 
-        vlan1 = response.data['vlans'][0]['vlan']
-        self.assertEqual(vlan1['id'], self.vlan1.id)
-        self.assertEqual(vlan1['vid'], self.vlan1.vid)
-        self.assertEqual(vlan1['name'], self.vlan1.name)
-        self.assertEqual(vlan1['status'], self.vlan1.status)
+        vlan1 = response.data['vlans'][0]
+        self.assertEqual(vlan1['id'], self.vc1_vlan1.id)
+        self.assertEqual(vlan1['vlan'], self.vlan1.id)
 
-        vlan2 = response.data['vlans'][1]['vlan']
-        self.assertEqual(vlan2['id'], self.vlan2.id)
-        self.assertEqual(vlan2['vid'], self.vlan2.vid)
-        self.assertEqual(vlan2['name'], self.vlan2.name)
-        self.assertEqual(vlan2['status'], self.vlan2.status)
+        vlan2 = response.data['vlans'][1]
+        self.assertEqual(vlan2['id'], self.vc1_vlan2.id)
+        self.assertEqual(vlan2['vlan'], self.vlan2.id)
 
     def test_get_404(self):
         response = self.client.get(f'{self.url}{100}/')
@@ -116,7 +108,7 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(len(response.data['vlans']), 0)
 
     def test_create_201_single_vlan(self):
-        data = {'vcid': 4, 'name': 'foo', 'context': 'bar', 'vlans': [{'id': self.vlan3.id}]}
+        data = {'vcid': 4, 'name': 'foo', 'context': 'bar', 'vlans': [{'vlan': self.vlan3.id}]}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['vcid'], 4)
@@ -125,14 +117,12 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(response.data['context'], 'bar')
         self.assertEqual(len(response.data['vlans']), 1)
 
-        vlan3 = response.data['vlans'][0]['vlan']
-        self.assertEqual(vlan3['id'], self.vlan3.id)
-        self.assertEqual(vlan3['vid'], self.vlan3.vid)
-        self.assertEqual(vlan3['name'], self.vlan3.name)
-        self.assertEqual(vlan3['status'], self.vlan3.status)
+        vlan3 = response.data['vlans'][0]
+        self.assertIn('id', vlan3)
+        self.assertEqual(vlan3['vlan'], self.vlan3.id)
 
     def test_create_201_multiple_vlans(self):
-        data = {'vcid': 5, 'name': 'foo', 'context': 'bar', 'vlans': [{'id': self.vlan4.id}, {'id': self.vlan5.id}]}
+        data = {'vcid': 5, 'name': 'foo', 'context': 'bar', 'vlans': [{'vlan': self.vlan4.id}, {'vlan': self.vlan5.id}]}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['vcid'], 5)
@@ -141,25 +131,21 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(response.data['context'], 'bar')
         self.assertEqual(len(response.data['vlans']), 2)
 
-        vlan4 = response.data['vlans'][0]['vlan']
-        self.assertEqual(vlan4['id'], self.vlan4.id)
-        self.assertEqual(vlan4['vid'], self.vlan4.vid)
-        self.assertEqual(vlan4['name'], self.vlan4.name)
-        self.assertEqual(vlan4['status'], self.vlan4.status)
+        vlan4 = response.data['vlans'][0]
+        self.assertIn('id', vlan4)
+        self.assertEqual(vlan4['vlan'], self.vlan4.id)
 
-        vlan5 = response.data['vlans'][1]['vlan']
-        self.assertEqual(vlan5['id'], self.vlan5.id)
-        self.assertEqual(vlan5['vid'], self.vlan5.vid)
-        self.assertEqual(vlan5['name'], self.vlan5.name)
-        self.assertEqual(vlan5['status'], self.vlan5.status)
+        vlan5 = response.data['vlans'][1]
+        self.assertIn('id', vlan5)
+        self.assertEqual(vlan5['vlan'], self.vlan5.id)
 
     def test_create_400_existed_vlan(self):
-        data = {'vcid': 6, 'name': 'foo', 'context': 'bar', 'vlans': [{'id': self.vlan1.id}]}
+        data = {'vcid': 6, 'name': 'foo', 'context': 'bar', 'vlans': [{'vlan': self.vlan1.id}]}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_400_non_existent_vlan(self):
-        data = {'vcid': 7, 'name': 'foo', 'context': 'bar', 'vlans': [{'id': 400}]}
+        data = {'vcid': 7, 'name': 'foo', 'context': 'bar', 'vlans': [{'vlan': 400}]}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
@@ -173,18 +159,6 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(response.data['context'], '')
         self.assertEqual(len(response.data['vlans']), 2)
 
-        vlan1 = response.data['vlans'][0]['vlan']
-        self.assertEqual(vlan1['id'], self.vlan1.id)
-        self.assertEqual(vlan1['vid'], self.vlan1.vid)
-        self.assertEqual(vlan1['name'], self.vlan1.name)
-        self.assertEqual(vlan1['status'], self.vlan1.status)
-
-        vlan2 = response.data['vlans'][1]['vlan']
-        self.assertEqual(vlan2['id'], self.vlan2.id)
-        self.assertEqual(vlan2['vid'], self.vlan2.vid)
-        self.assertEqual(vlan2['name'], self.vlan2.name)
-        self.assertEqual(vlan2['status'], self.vlan2.status)
-
     def test_patch_200_status(self):
         data = {'status': VirtualCircuitStatusChoices.STATUS_CONFIGURED}
         response = self.client.patch(f'{self.url}{self.vc1.vcid}/', data, format='json')
@@ -194,18 +168,6 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(response.data['status'], VirtualCircuitStatusChoices.STATUS_CONFIGURED)
         self.assertEqual(response.data['context'], '')
         self.assertEqual(len(response.data['vlans']), 2)
-
-        vlan1 = response.data['vlans'][0]['vlan']
-        self.assertEqual(vlan1['id'], self.vlan1.id)
-        self.assertEqual(vlan1['vid'], self.vlan1.vid)
-        self.assertEqual(vlan1['name'], self.vlan1.name)
-        self.assertEqual(vlan1['status'], self.vlan1.status)
-
-        vlan2 = response.data['vlans'][1]['vlan']
-        self.assertEqual(vlan2['id'], self.vlan2.id)
-        self.assertEqual(vlan2['vid'], self.vlan2.vid)
-        self.assertEqual(vlan2['name'], self.vlan2.name)
-        self.assertEqual(vlan2['status'], self.vlan2.status)
 
     def test_patch_400_invalid_status(self):
         data = {'status': 'invalid'}
