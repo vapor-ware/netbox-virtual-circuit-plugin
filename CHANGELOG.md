@@ -1,5 +1,22 @@
 # Changelog
 
+## [v1.0.0](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/tree/v1.0.0) (2020-08-21)
+
+[Full Changelog](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/compare/v0.3.1...v1.0.0)
+
+**Implemented enhancements:**
+
+- Add VCID plugin info inside "Change Log" [\#31](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/issues/31)
+
+**Merged pull requests:**
+
+- Fix swagger missing id [\#35](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/35) ([hoanhan101](https://github.com/hoanhan101))
+- Include change log [\#32](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/32) ([hoanhan101](https://github.com/hoanhan101))
+
+## [v0.3.1](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/tree/v0.3.1) (2020-07-30)
+
+[Full Changelog](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/compare/v0.3.0...v0.3.1)
+
 ## [v0.3.0](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/tree/v0.3.0) (2020-07-21)
 
 [Full Changelog](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/compare/v0.2.1...v0.3.0)
