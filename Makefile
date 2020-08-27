@@ -30,7 +30,7 @@ release: clean  ## Package and distribute the current release to PyPI
 	python3 setup.py sdist bdist_wheel
 	python3 -m twine upload dist/*
 
-test: docker  ## Run unit tests
+test: ## Run unit tests
 	docker-compose -f ${COMPOSE_FILE} -p ${IMAGE_NAME} run netbox sh -c "python manage.py test ${IMAGE_NAME}"
 
 version:  ## Print the version
