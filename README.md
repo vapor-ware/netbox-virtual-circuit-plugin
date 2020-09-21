@@ -42,6 +42,15 @@ python3 manage.py migrate
 
 For more information about installing plugins, refer to [NetBox's documentation.](https://netbox.readthedocs.io/en/stable/plugins/)
 
+## Compatibility
+
+Below is a table describing the compatibility of various NetBox versions with NetBox Virtual Circuit Plugin versions.
+
+|         | Netbox 2.8 and below | NetBox 2.0 and up |
+|--------------------------------|-------------------|
+| `1.0.0` | ✓                    | ✗                 |
+| `1.1.0` | ✗                    | ✓                 |
+
 ## Using
 
 Once the plugin is installed correctly as instructed above, one can find the
