@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.views.generic import View
 from utilities.views import BulkDeleteView, ObjectEditView, ObjectListView, ObjectDeleteView
 
@@ -22,7 +22,7 @@ class VirtualCircuitView(View):
             'vlans': vlans,
         })
 
-class VirtualCircuitListView(ObjectListView):
+class VirtualCircuitListView(PermissionRequiredMixin, ObjectListView):
     permission_required = 'netbox_virtual_circuit_plugin.view_virtualcircuit'
     queryset = VirtualCircuit.objects.all()
     filterset = VirtualCircuitFilter
@@ -30,7 +30,7 @@ class VirtualCircuitListView(ObjectListView):
     table = VirtualCircuitTable
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_list.html'
 
-class VirtualCircuitCreateView(ObjectEditView):
+class VirtualCircuitCreateView(PermissionRequiredMixin, ObjectEditView):
     permission_required = 'netbox_virtual_circuit_plugin.add_virtualcircuit'
     model = VirtualCircuit
     queryset = VirtualCircuit.objects.all()
@@ -41,24 +41,24 @@ class VirtualCircuitCreateView(ObjectEditView):
 class VirtualCircuitEditView(VirtualCircuitCreateView):
     permission_required = 'netbox_virtual_circuit_plugin.change_virtualcircuit'
 
-class VirtualCircuitDeleteView(ObjectDeleteView):
+class VirtualCircuitDeleteView(PermissionRequiredMixin, ObjectDeleteView):
     permission_required = 'netbox_virtual_circuit_plugin.delete_virtualcircuit'
     model = VirtualCircuit
     default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
 
-class VirtualCircuitBulkDeleteView(BulkDeleteView):
+class VirtualCircuitBulkDeleteView(PermissionRequiredMixin, BulkDeleteView):
     permission_required = 'netbox_virtual_circuit_plugin.delete_virtualcircuit'
     queryset = VirtualCircuit.objects.filter()
     table = VirtualCircuitTable
     default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
 
-class VirtualCircuitVLANListView(ObjectListView):
+class VirtualCircuitVLANListView(PermissionRequiredMixin, ObjectListView):
     permission_required = 'netbox_virtual_circuit_plugin.view_virtualcircuitvlan'
     queryset = VirtualCircuitVLAN.objects.all()
     table = VirtualCircuitVLANTable
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_vlan_list.html'
 
-class VirtualCircuitVLANCreateView(ObjectEditView):
+class VirtualCircuitVLANCreateView(PermissionRequiredMixin, ObjectEditView):
     permission_required = 'netbox_virtual_circuit_plugin.add_virtualcircuitvlan'
     model = VirtualCircuitVLAN
     queryset = VirtualCircuitVLAN.objects.all()
@@ -66,7 +66,7 @@ class VirtualCircuitVLANCreateView(ObjectEditView):
     template_name = 'netbox_virtual_circuit_plugin/virtual_circuit_vlan_edit.html'
     default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_list'
 
-class VirtualCircuitVLANBulkDeleteView(BulkDeleteView):
+class VirtualCircuitVLANBulkDeleteView(PermissionRequiredMixin, BulkDeleteView):
     permission_required = 'netbox_virtual_circuit_plugin.delete_virtualcircuitvlan'
     queryset = VirtualCircuitVLAN.objects.filter()
     table = VirtualCircuitVLANTable

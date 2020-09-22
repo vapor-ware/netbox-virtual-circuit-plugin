@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
 from ipam.models import VLAN
-from utilities.models import ChangeLoggedModel
+from extras.models import ChangeLoggedModel
 
 from .choices import VirtualCircuitStatusChoices
 
