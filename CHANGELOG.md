@@ -1,5 +1,21 @@
 # Changelog
 
+## [v1.1.0](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/tree/v1.1.0) (2020-09-22)
+
+[Full Changelog](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/compare/v1.0.0...v1.1.0)
+
+**Fixed bugs:**
+
+- Plugin fails jsonschema/open api validation [\#34](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/issues/34)
+
+**Closed issues:**
+
+- Setup GitHub Actions pipeline [\#30](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/issues/30)
+
+**Merged pull requests:**
+
+- Fix NetBox 2.9.3 compatibility issues [\#38](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/38) ([hoanhan101](https://github.com/hoanhan101))
+
 ## [v1.0.0](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/tree/v1.0.0) (2020-08-21)
 
 [Full Changelog](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/compare/v0.3.1...v1.0.0)
