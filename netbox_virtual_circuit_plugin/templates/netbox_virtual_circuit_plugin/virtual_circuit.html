@@ -53,17 +53,21 @@
                     <tr style="background-color:#f8f8f8;">
                         <th>VLAN</th>
                         <th>Status</th>
+                        <th>Device</th>
                         <th>Interface</th>
                     </tr>
                     {% for vlan in vlans %}
                     <tr>
                         <td><a href="{% url 'ipam:vlan_list' %}{{ vlan.pk }}">{{ vlan.vid }} ({{ vlan.name }})</a></td>
                         <td><span class="label label-{{ vlan.get_status_class }}">{{ vlan.get_status_display }}</span></td>
-                        <td>{{ vlan.get_members.0 }}</td> <!-- NOTE: get only the first member due to Vapor's specific use case -->
+                        <!-- NOTE: get only the first member due to Vapor's specific use case -->
+                        <td><a href="{% url 'dcim:device_list' %}{{ vlan.get_interfaces.0.parent.id }}">{{ vlan.get_interfaces.0.parent }}</a></td>
+                        <td><a href="{% url 'dcim:interface_list' %}{{ vlan.get_interfaces.0.id }}">{{ vlan.get_interfaces.0 }}</a></td>
                     </tr>
                     {% empty %}
                     <tr>
                         <td class="text-muted">No VLAN has been assigned yet!</td>
+                        <td></td>
                         <td></td>
                         <td></td>
                     </tr>
