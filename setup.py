@@ -10,7 +10,7 @@ if os.path.exists('README.md'):
 
 setup(
     name='netbox-virtual-circuit-plugin',
-    version='1.2.0',
+    version='1.3.0',
     description='A Netbox plugin that supports Virtual Circuit management',
     long_description=readme,
     long_description_content_type='text/markdown',
