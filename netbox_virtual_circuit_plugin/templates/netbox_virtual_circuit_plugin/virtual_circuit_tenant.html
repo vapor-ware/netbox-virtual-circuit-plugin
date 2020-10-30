@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <strong>Plugin Stats</strong>
+    </div>
+    <div class="panel-body">
+        <div class="col-md-4 text-center">
+            <!-- This links to all Virtual Circuits instead of ones filtered by tenant since tenant is not yet a member of Virtual Circuit model. -->
+            <h2><a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list' %}" class="btn {% if count %}btn-primary{% else %}btn-default{% endif %} btn-lg">{{ count }}</a></h2>
+            <p>Virtual Circuits</p>
+        </div>
+    </div>
+</div>
