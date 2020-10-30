@@ -1,5 +1,32 @@
 # Changelog
 
+## [Unreleased](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/tree/HEAD)
+
+[Full Changelog](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/compare/v1.4.0...HEAD)
+
+**Implemented enhancements:**
+
+- `vlan\_of` related name is awkward [\#41](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/issues/41)
+
+## [v1.4.0](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/tree/v1.4.0) (2020-10-30)
+
+[Full Changelog](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/compare/v1.1.0...v1.4.0)
+
+**Implemented enhancements:**
+
+- Add a box for Virtual Circuits in the tenant information screen. [\#40](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/issues/40)
+
+**Closed issues:**
+
+- Include device in VLAN list next to interface [\#42](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/issues/42)
+- netbox:: ChangeLoggedModel has moved location and is now in extras [\#37](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/issues/37)
+
+**Merged pull requests:**
+
+- Update VCVLAN related name [\#46](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/46) ([hoanhan101](https://github.com/hoanhan101))
+- Inject Virtual Circuit counts to Tenant screen [\#45](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/45) ([hoanhan101](https://github.com/hoanhan101))
+- Include VLAN's interface parent [\#44](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/44) ([hoanhan101](https://github.com/hoanhan101))
+
 ## [v1.1.0](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/tree/v1.1.0) (2020-09-22)
 
 [Full Changelog](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/compare/v1.0.0...v1.1.0)
@@ -28,6 +55,7 @@
 
 - Fix swagger missing id [\#35](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/35) ([hoanhan101](https://github.com/hoanhan101))
 - Include change log [\#32](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/32) ([hoanhan101](https://github.com/hoanhan101))
+- Set VCID's range from 1 to 4294967295 [\#28](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/28) ([hoanhan101](https://github.com/hoanhan101))
 
 ## [v0.3.1](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/tree/v0.3.1) (2020-07-30)
 
@@ -48,7 +76,6 @@
 **Merged pull requests:**
 
 - Run makemigrations in Django and produce a migration file locally [\#29](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/29) ([hoanhan101](https://github.com/hoanhan101))
-- Set VCID's range from 1 to 4294967295 [\#28](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/28) ([hoanhan101](https://github.com/hoanhan101))
 - Update status to better reflect the provisioning process [\#27](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/27) ([hoanhan101](https://github.com/hoanhan101))
 - Include docs in source distribution [\#25](https://github.com/vapor-ware/netbox-virtual-circuit-plugin/pull/25) ([hoanhan101](https://github.com/hoanhan101))
 
