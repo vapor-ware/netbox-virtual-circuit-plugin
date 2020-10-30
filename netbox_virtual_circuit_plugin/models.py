@@ -54,7 +54,7 @@ class VirtualCircuitVLAN(ChangeLoggedModel):
     vlan = models.OneToOneField(
         to=VLAN,
         on_delete=models.CASCADE,
-        related_name='vlan_of',
+        related_name='virtual_circuit',
         verbose_name='VLAN',
     )
 
