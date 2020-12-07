@@ -6,7 +6,7 @@ from .models import VirtualCircuit, VirtualCircuitVLAN
 class VirtualCircuitAdmin(admin.ModelAdmin):
     """Administrative view for VirtualCircuit."""
 
-    list_display = ('vcid', 'name', 'status', 'context')
+    list_display = ('vcid', 'name', 'status', 'context', 'description')
 
 
 @admin.register(VirtualCircuitVLAN)

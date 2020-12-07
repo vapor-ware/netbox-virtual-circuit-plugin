@@ -46,6 +46,7 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(vc1['name'], self.vc1.name)
         self.assertEqual(vc1['status'], self.vc1.status)
         self.assertEqual(vc1['context'], self.vc1.context)
+        self.assertEqual(vc1['description'], self.vc1.description)
         self.assertEqual(len(vc1['vlans']), 2)
 
         vlan1 = vc1['vlans'][0]
@@ -61,6 +62,7 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(vc2['name'], self.vc2.name)
         self.assertEqual(vc2['status'], self.vc2.status)
         self.assertEqual(vc2['context'], self.vc2.context)
+        self.assertEqual(vc2['description'], self.vc2.description)
         self.assertEqual(len(vc2['vlans']), 0)
 
     def test_get_200(self):
@@ -70,6 +72,7 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(response.data['name'], self.vc1.name)
         self.assertEqual(response.data['status'], VirtualCircuitStatusChoices.STATUS_PENDING_CONFIGURATION)
         self.assertEqual(response.data['context'], '')
+        self.assertEqual(response.data['description'], '')
         self.assertEqual(len(response.data['vlans']), 2)
 
         vlan1 = response.data['vlans'][0]
@@ -93,28 +96,30 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertIn('vlans', response.data)
 
     def test_create_400_existed_vc(self):
-        data = {'vcid': 1, 'name': 'foo', 'context': 'bar', 'vlans': []}
+        data = {'vcid': 1, 'name': 'foo', 'context': 'bar', 'description': 'foobar', 'vlans': []}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_201_no_vlan(self):
-        data = {'vcid': 3, 'name': 'foo', 'context': 'bar', 'vlans': []}
+        data = {'vcid': 3, 'name': 'foo', 'context': 'bar', 'description': 'foobar', 'vlans': []}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['vcid'], 3)
         self.assertEqual(response.data['name'], 'foo')
         self.assertEqual(response.data['status'], VirtualCircuitStatusChoices.STATUS_PENDING_CONFIGURATION)
         self.assertEqual(response.data['context'], 'bar')
+        self.assertEqual(response.data['description'], 'foobar')
         self.assertEqual(len(response.data['vlans']), 0)
 
     def test_create_201_single_vlan(self):
-        data = {'vcid': 4, 'name': 'foo', 'context': 'bar', 'vlans': [{'vlan': self.vlan3.id}]}
+        data = {'vcid': 4, 'name': 'foo', 'context': 'bar', 'description': 'foobar', 'vlans': [{'vlan': self.vlan3.id}]}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['vcid'], 4)
         self.assertEqual(response.data['name'], 'foo')
         self.assertEqual(response.data['status'], VirtualCircuitStatusChoices.STATUS_PENDING_CONFIGURATION)
         self.assertEqual(response.data['context'], 'bar')
+        self.assertEqual(response.data['description'], 'foobar')
         self.assertEqual(len(response.data['vlans']), 1)
 
         vlan3 = response.data['vlans'][0]
@@ -122,13 +127,14 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(vlan3['vlan'], self.vlan3.id)
 
     def test_create_201_multiple_vlans(self):
-        data = {'vcid': 5, 'name': 'foo', 'context': 'bar', 'vlans': [{'vlan': self.vlan4.id}, {'vlan': self.vlan5.id}]}
+        data = {'vcid': 5, 'name': 'foo', 'context': 'bar', 'description': 'foobar', 'vlans': [{'vlan': self.vlan4.id}, {'vlan': self.vlan5.id}]}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['vcid'], 5)
         self.assertEqual(response.data['name'], 'foo')
         self.assertEqual(response.data['status'], VirtualCircuitStatusChoices.STATUS_PENDING_CONFIGURATION)
         self.assertEqual(response.data['context'], 'bar')
+        self.assertEqual(response.data['description'], 'foobar')
         self.assertEqual(len(response.data['vlans']), 2)
 
         vlan4 = response.data['vlans'][0]
@@ -140,12 +146,12 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(vlan5['vlan'], self.vlan5.id)
 
     def test_create_400_existed_vlan(self):
-        data = {'vcid': 6, 'name': 'foo', 'context': 'bar', 'vlans': [{'vlan': self.vlan1.id}]}
+        data = {'vcid': 6, 'name': 'foo', 'context': 'bar', 'description': 'foobar', 'vlans': [{'vlan': self.vlan1.id}]}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_create_400_non_existent_vlan(self):
-        data = {'vcid': 7, 'name': 'foo', 'context': 'bar', 'vlans': [{'vlan': 400}]}
+        data = {'vcid': 7, 'name': 'foo', 'context': 'bar', 'description': 'foobar', 'vlans': [{'vlan': 400}]}
         response = self.client.post(self.url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
@@ -157,6 +163,7 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(response.data['name'], 'patched-foo')
         self.assertEqual(response.data['status'], VirtualCircuitStatusChoices.STATUS_PENDING_CONFIGURATION)
         self.assertEqual(response.data['context'], '')
+        self.assertEqual(response.data['description'], '')
         self.assertEqual(len(response.data['vlans']), 2)
 
     def test_patch_200_status(self):
@@ -167,6 +174,7 @@ class VirtualCircuitEndpointTestCase(TestCase):
         self.assertEqual(response.data['name'], 'VC 1')
         self.assertEqual(response.data['status'], VirtualCircuitStatusChoices.STATUS_CONFIGURED)
         self.assertEqual(response.data['context'], '')
+        self.assertEqual(response.data['description'], '')
         self.assertEqual(len(response.data['vlans']), 2)
 
     def test_patch_400_invalid_status(self):

@@ -16,6 +16,7 @@ class VirtualCircuitForm(BootstrapMixin, forms.ModelForm):
             'name',
             'status',
             'context',
+            'description',
         ]
 
 class VirtualCircuitFilterForm(BootstrapMixin, forms.ModelForm):
@@ -34,6 +35,7 @@ class VirtualCircuitFilterForm(BootstrapMixin, forms.ModelForm):
             'q',
             'status',
             'context',
+            'description',
         ]
 
 class VirtualCircuitVLANForm(BootstrapMixin, forms.ModelForm):
