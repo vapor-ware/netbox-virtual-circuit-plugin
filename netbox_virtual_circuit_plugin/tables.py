@@ -20,6 +20,7 @@ class VirtualCircuitTable(BaseTable):
             'name',
             'status',
             'context',
+            'description',
         )
 
 class VirtualCircuitVLANTable(BaseTable):

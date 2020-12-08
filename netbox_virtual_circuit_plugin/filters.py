@@ -17,6 +17,7 @@ class VirtualCircuitFilter(NameSlugSearchFilterSet):
         fields = [
             'status',
             'context',
+            'description',
         ]
 
     def search(self, queryset, name, value):
@@ -28,6 +29,7 @@ class VirtualCircuitFilter(NameSlugSearchFilterSet):
             | Q(name__icontains=value)
             | Q(status__icontains=value)
             | Q(context__icontains=value)
+            | Q(description__icontains=value)
         )
 
         return queryset.filter(qs_filter)

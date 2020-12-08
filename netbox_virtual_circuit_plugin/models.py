@@ -30,6 +30,10 @@ class VirtualCircuit(ChangeLoggedModel):
         max_length=100,
         blank=True,
     )
+    description = models.CharField(
+        max_length=100,
+        blank=True,
+    )
 
     class Meta:
         ordering = ['vcid']
