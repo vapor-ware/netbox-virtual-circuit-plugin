@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import get_object_or_404, get_list_or_404, render
 from django.views.generic import View
-from utilities.views import BulkDeleteView, ObjectEditView, ObjectListView, ObjectDeleteView
+from netbox.views.generic import BulkDeleteView, ObjectEditView, ObjectListView, ObjectDeleteView
 
 from .filters import VirtualCircuitFilter
 from .forms import VirtualCircuitForm, VirtualCircuitVLANForm, VirtualCircuitFilterForm
