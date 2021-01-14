@@ -11,7 +11,7 @@ menu_items = (
             PluginMenuButton(
                 link='plugins:netbox_virtual_circuit_plugin:virtual_circuit_add',
                 title='Add a new virtual circuit',
-                icon_class='fa fa-plus',
+                icon_class='mdi mdi-plus-thick',
                 color=ButtonColorChoices.GREEN,
                 permissions=['netbox_virtual_circuit_plugin.add_virtualcircuit']
             ),
@@ -25,7 +25,7 @@ menu_items = (
             PluginMenuButton(
                 link='plugins:netbox_virtual_circuit_plugin:virtual_circuit_vlan_add',
                 title='Assign a VLAN to a Virtual Circuit',
-                icon_class='fa fa-plus',
+                icon_class='mdi mdi-plus-thick',
                 color=ButtonColorChoices.GREEN,
                 permissions=['netbox_virtual_circuit_plugin.add_virtualcircuitvlan']
             ),
