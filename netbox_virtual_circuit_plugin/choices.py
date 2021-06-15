@@ -8,6 +8,7 @@ class VirtualCircuitStatusChoices(ChoiceSet):
     STATUS_CONFIGURED = 'configured'
     STATUS_CONFIGURATION_ERROR = 'configuration-error'
     STATUS_PENDING_DEACTIVATION = 'pending-deactivation'
+    STATUS_DEACTIVATION_ERROR = 'deactivation-error'
     STATUS_DEACTIVATED = 'deactivated'
 
     CHOICES = (
@@ -15,5 +16,6 @@ class VirtualCircuitStatusChoices(ChoiceSet):
         (STATUS_CONFIGURED, 'Configured'),
         (STATUS_CONFIGURATION_ERROR, 'Configuration Error'),
         (STATUS_PENDING_DEACTIVATION, 'Pending Deactivation'),
+        (STATUS_DEACTIVATION_ERROR, 'Deactivation Error'),
         (STATUS_DEACTIVATED, 'Deactivated'),
     )
