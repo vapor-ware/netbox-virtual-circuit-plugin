@@ -43,7 +43,7 @@ class VirtualCircuitEditView(VirtualCircuitCreateView):
 
 class VirtualCircuitDeleteView(PermissionRequiredMixin, ObjectDeleteView):
     permission_required = 'netbox_virtual_circuit_plugin.delete_virtualcircuit'
-    model = VirtualCircuit
+    queryset = VirtualCircuit.objects.all()
     default_return_url = 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_list'
 
 class VirtualCircuitBulkDeleteView(PermissionRequiredMixin, BulkDeleteView):
