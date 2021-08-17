@@ -1,18 +1,14 @@
 from rest_framework.viewsets import ModelViewSet
 from netbox_virtual_circuit_plugin.models import VirtualCircuit, VirtualCircuitVLAN
 from .serializers import VirtualCircuitSerializer, VirtualCircuitVLANSerializer
+from netbox_virtual_circuit_plugin.filters import VirtualCircuitFilter
 
 
 class VirtualCircuitViewSet(ModelViewSet):
     serializer_class = VirtualCircuitSerializer
+    queryset = VirtualCircuit.objects.all()
+    filterset_class = VirtualCircuitFilter
 
-    def get_queryset(self):
-        context = self.request.query_params.get('context', None)
-        if context is None:
-            queryset = VirtualCircuit.objects.all().order_by('vcid')
-        else:
-            queryset = VirtualCircuit.objects.filter(context=context)
-        return queryset
 
 class VirtualCircuitVLANViewSet(ModelViewSet):
     queryset = VirtualCircuitVLAN.objects.all()
