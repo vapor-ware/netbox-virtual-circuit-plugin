@@ -2,12 +2,12 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
 from ipam.models import VLAN
-from extras.models import ChangeLoggedModel
+from netbox.models import ChangeLoggingMixin
 
 from .choices import VirtualCircuitStatusChoices
 
 
-class VirtualCircuit(ChangeLoggedModel):
+class VirtualCircuit(ChangeLoggingMixin):
     """Virtual Circuit model."""
 
     vcid = models.BigIntegerField(
@@ -46,7 +46,8 @@ class VirtualCircuit(ChangeLoggedModel):
     def get_absolute_url(self):
         return reverse('plugins:netbox_virtual_circuit_plugin:virtual_circuit', args=[self.vcid])
 
-class VirtualCircuitVLAN(ChangeLoggedModel):
+
+class VirtualCircuitVLAN(ChangeLoggingMixin):
     """Virtual Circuit to VLAN relationship."""
 
     virtual_circuit = models.ForeignKey(

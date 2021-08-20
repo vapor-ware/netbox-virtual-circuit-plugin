@@ -1,12 +1,10 @@
 import django_filters
 from django.db.models import Q
 
-from utilities.filters import NameSlugSearchFilterSet
-
 from .models import VirtualCircuit
 
 
-class VirtualCircuitFilter(NameSlugSearchFilterSet):
+class VirtualCircuitFilter(django_filters.FilterSet):
     q = django_filters.CharFilter(
         method="search",
         label="Search",
@@ -15,6 +13,7 @@ class VirtualCircuitFilter(NameSlugSearchFilterSet):
     class Meta:
         model = VirtualCircuit
         fields = [
+            'vcid',
             'status',
             'context',
             'description',
