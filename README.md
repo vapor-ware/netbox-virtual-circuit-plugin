@@ -46,11 +46,12 @@ For more information about installing plugins, refer to [NetBox's documentation.
 
 Below is a table describing the compatibility of various NetBox versions with NetBox Virtual Circuit Plugin versions.
 
-|                   | Netbox 2.8 | NetBox 2.9 | Netbox 2.10 |
-| ----------------- | ---------- | ---------- | ----------- |
-| `1.0.x`           | ✓          | ✗          | ✗           |
-| `1.1.x` to `1.5.x`| ✗          | ✓          | ✗           |
-| `1.6.x` and above | ✗          | ✗          | ✓           |
+|                   | Netbox 2.8 | NetBox 2.9 | Netbox 2.10 | Netbox 2.11 |
+| ----------------- | ---------- | ---------- | ----------- | ----------- |
+| `1.0.x`           | ✓          | ✗          | ✗           | x           |
+| `1.1.x` to `1.5.x`| ✗          | ✓          | ✗           | x           |
+| `1.6.x` and above | ✗          | ✗          | ✓           | x           |
+| `1.7.x` and above | ✗          | ✗          | x           | ✓           |
 
 ## Using
 
