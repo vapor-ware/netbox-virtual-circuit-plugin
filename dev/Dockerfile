@@ -4,7 +4,7 @@ RUN pip install --upgrade pip
 
 # Install netbox.
 RUN mkdir -p /opt
-RUN git clone --single-branch --branch master https://github.com/netbox-community/netbox.git /opt/netbox/ && \
+RUN git clone --branch v3.0.0 https://github.com/netbox-community/netbox.git /opt/netbox/ && \
     cd /opt/netbox/ && \
     pip install -r /opt/netbox/requirements.txt
 
