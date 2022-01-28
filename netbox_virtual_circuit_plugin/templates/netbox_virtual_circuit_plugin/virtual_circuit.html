@@ -1,21 +1,21 @@
 {% extends 'base/layout.html' %}
 
-{% block header %}
-<div class="pull-right noprint">
-    <a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_add' %}?vcid={{ virtual_circuit.vcid }}&name={{ virtual_circuit.name }}&status={{ virtual_circuit.status }}&context={{ virtual_circuit.context }}" class="btn btn-success">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        Clone
-    </a>
-    <a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_edit' pk=virtual_circuit.vcid %}" class="btn btn-warning">
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-        Edit
-    </a>
-    <a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_delete' pk=virtual_circuit.vcid %}" class="btn btn-danger">
-        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-        Delete
-    </a>
-</div>
-{% endblock %}
+{% block controls %}
+    <div class="pull-right noprint">
+        <a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_add' %}?vcid={{ virtual_circuit.vcid }}&name={{ virtual_circuit.name }}&status={{ virtual_circuit.status }}&context={{ virtual_circuit.context }}" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            Clone
+        </a>
+        <a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_edit' pk=virtual_circuit.vcid %}" class="btn btn-warning">
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+            Edit
+        </a>
+        <a href="{% url 'plugins:netbox_virtual_circuit_plugin:virtual_circuit_delete' pk=virtual_circuit.vcid %}" class="btn btn-danger">
+            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            Delete
+        </a>
+    </div>
+{% endblock controls %}
 
 {% block content %}
 {% with config=settings.PLUGINS_CONFIG.netbox_virtual_circuit_plugin %}
@@ -65,7 +65,7 @@
                         <td><a href="{% url 'ipam:vlan_list' %}{{ vlan.pk }}">{{ vlan.vid }} ({{ vlan.name }})</a></td>
                         <td><span class="label label-{{ vlan.get_status_class }}">{{ vlan.get_status_display }}</span></td>
                         <!-- NOTE: get only the first member due to Vapor's specific use case -->
-                        <td><a href="{% url 'dcim:device_list' %}{{ vlan.get_interfaces.0.parent.id }}">{{ vlan.get_interfaces.0.parent }}</a></td>
+                        <td><a href="{% url 'dcim:device_list' %}{{ vlan.get_interfaces.0.device.id }}">{{ vlan.get_interfaces.0.device }}</a></td>
                         <td><a href="{% url 'dcim:interface_list' %}{{ vlan.get_interfaces.0.id }}">{{ vlan.get_interfaces.0 }}</a></td>
                     </tr>
                     {% empty %}
