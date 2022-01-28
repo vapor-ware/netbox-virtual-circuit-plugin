@@ -6,7 +6,8 @@ RUN pip install --upgrade pip
 RUN mkdir -p /opt
 RUN git clone --branch v3.0.0 https://github.com/netbox-community/netbox.git /opt/netbox/ && \
     cd /opt/netbox/ && \
-    pip install -r /opt/netbox/requirements.txt
+    pip install -r /opt/netbox/requirements.txt && \
+    pip install jsonschema==3.2.0 && \
 
 # Copy entrypoint script.
 COPY dev/entrypoint.sh /opt/netbox/entrypoint.sh
