@@ -52,7 +52,7 @@ Below is a table describing the compatibility of various NetBox versions with Ne
 | `1.1.x` to `1.5.x`| ✗          | ✓          | ✗           | x           | x          | x          |
 | `1.6.x`           | ✗          | ✗          | ✓           | x           | x          | x          |
 | `1.7.x`           | ✗          | ✗          | x           | ✓           | x          | x          |
-| `2.0.0`           | ✗          | ✗          | x           | ✓           | ✓          | x          |
+| `2.0.0`           | ✗          | ✗          | x           | ✓           | x          | ✓          |
 
 ## Using
 
