@@ -35,13 +35,15 @@ services:
     tty: true
 
   postgres:
-    image: postgres:10
+    image: postgres:12-alpine
     env_file: dev.env
+    ports:
+      - "5432:5432"
     volumes:
       - pgdata_netbox_virtual_circuit_plugin:/var/lib/postgresql/data
 
   redis:
-    image: redis:5-alpine
+    image: redis:6-alpine
     command:
       - sh
       - -c  # this is to evaluate the $REDIS_PASSWORD from the env
